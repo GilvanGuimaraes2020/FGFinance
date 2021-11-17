@@ -1,0 +1,35 @@
+
+ {% extends "material/base.html" %} 
+<!DOCTYPE html>
+
+<html>
+   {% block title %}{{config.get('TITLE')}}{% endblock %} 
+
+{% block content %}
+    {% block header %}
+
+    {% include "head.html" %}
+
+    {% endblock %}
+  <div class="container">
+    <h1>{{title}}</h1>
+    <div class="jumbotron">
+        <ul class="list-group">
+            {%for product in products%}
+                <li class="list-group-item">{{product}}</li>
+            {%endfor%}
+
+        </ul>
+    </div>
+  </div>
+
+
+{% include "footer.html" %}
+
+
+{% endblock %}
+
+
+</html>
+
+

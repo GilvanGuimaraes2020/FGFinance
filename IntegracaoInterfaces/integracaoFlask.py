@@ -10,6 +10,14 @@ def index():
     products = ['Baguete', 'Ciabata', 'Pretzel']
     return render_template('index.html' , products=products )
 
+@app.route('/about')
+def about():
+    return render_template('about.html' )
+
+@app.route('/valuation')
+def valuation():
+    return render_template('valuation.html' )
+
 @app.route('/simulation')
 def simulation():
     data=[
@@ -22,9 +30,9 @@ def simulation():
         ("07/01/2021", 2000)
     ]
 
-    labelsData = [row[0] for row in data]
-    valuesData= [row[1] for row in data]
-
+    labelsData = [row[0] for row in data] 
+    valuesData= [row[1] for row in data] 
+    print(labelsData)
     return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData)
 
 """

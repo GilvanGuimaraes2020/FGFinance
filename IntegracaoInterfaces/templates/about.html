@@ -1,30 +1,44 @@
-import Cabecalho
-import Rodape
+{% extends "material/base.html" %} 
+<!DOCTYPE html>
 
-msg = """Este software eh sobre analise financeira.
+<html>
+   {% block title %}{{config.get('TITLE')}}{% endblock %} 
 
-Para um investidor a analise financeira eh de extrema importancia,
+{% block content %}
+    {% block header %}
+
+        {% include "head.html" %}
+
+    {% endblock %}
+
+ 
+<p>Este software eh sobre analise financeira.</p>
+
+<p>Para um investidor a analise financeira eh de extrema importancia,
 pois por meio dela ele se guiara para tomar as melhores decisoes de
-como e onde aplicara o seu dinheiro.
+como e onde aplicara o seu dinheiro.</p>
 
-No mundo dos investimentos a informacao eh a materia prima para um
+<p>
+  No mundo dos investimentos a informacao eh a materia prima para um
 investidor se posicionar no melhor ativo finaceiro e tambem no melhor
 momento. Portanto aqueles mais bem informados tem a chance de
-diminuirem o risco envolvido nos investimentos.
+diminuirem o risco envolvido nos investimentos.  
+</p>
 
-O objetivo deste software nao eh recomendar a compra ou venda de acoes
+<p>
+   O objetivo deste software nao eh recomendar a compra ou venda de acoes
 ou de qualquer outro tipo de ativo financeiro. O proposito eh
 concentrar informacoes para alimentar os investidores e estes poderem
-analisa-las para tomar as suas proprias decisoes.
+analisa-las para tomar as suas proprias decisoes. 
+</p>
 
-Software desenvolvido por:
+<img src="C:\flutter_dev\ADSPhyton\ProjetoMercFinan\images\FernandoAPP.JPG" style="width:300px;height:200px;"/>
+<img src="C:\flutter_dev\ADSPhyton\ProjetoMercFinan\images\FernandoAPP.JPG" style="width:300px;height:200px;"/>
 
-    => Fernando de Oliveira Pina, RA: 2840481923023
-    => Gilvan Macedo Guimaraes, RA: 2840481923009
-"""
+{% include "footer.html" %}
 
-Cabecalho.cabecalho()
-print('                                SOBRE')
-print("----------------------------------------------------------------------\n")
-print(msg)
-Rodape.rodape()
+
+{% endblock %}
+
+
+</html>

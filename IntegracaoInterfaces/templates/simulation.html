@@ -14,6 +14,8 @@
         <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>  -->
         
         <link href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
         <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> 
         <style>
             .ct-series-a .ct-point {
@@ -27,76 +29,60 @@
         </style>
 
         </head>
-      
+       
       <body> 
         
         <nav>
           <div class="nav-wrapper">
             <a href="/" class="brand-logo">FGFinance</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li><a href="/simulation">Valuation</a></li>
-              <li><a href="/">Simulation</a></li>
-              <li><a href="/">About</a></li>
+              <li><a href="/">Valuation</a></li>
+              <li><a href="/simulation">Simulation</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
           </div>
         </nav>
+{% endblock %}
+   <!-- <div>
+    <ul class="list-group">
+      {%for label in labelsData%}
+          <li class="list-group-item">{{label}}</li>
+      {%endfor%}
 
-    {% endblock %}
+  </ul>
+   </div> -->
 
-    <div class="card-panel teal lighten-2">
-       <h1> Essa é a segunda rota da aplicaçao aaaa </h1> 
-    </div>
-    <div class="ct-chart ct-perfect-third"></div>   
+    <canvas id="myChart" ></canvas>
+      
     
 <script>
-    var data = {
-  
-  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-  
-  series: [
-  [12, 9, 7, 8, 5],
-  
-  ]
-};
+  // Line Chart
+  new Chart(document.getElementById("myChart"), {
+          type: 'line',
+          data: {
+            labels: {{labelsData | safe}},
+            datasets: [
+              {
+                label: "Population (millions)",
+                borderColor: "#3e95cd",
+                data: {{valuesData | safe}}
+              }
+            ]
+          },
+          options: {
+            responsive:true,
+            title: {
+              display: true,
+              text: 'Total Confirmed Cases of COVID in May'
+            }
+          },
+          hover: {
+     mode: 'index',
+     intersect: true
+    },
+      });
+   
 
-var options = {
-  width: 800,
-  height: 400,
-  chartPadding:{
-      right:40
-  },
-  showArea:false,
-  fullWidth:true,
-  backGround:"rgb(150,150,150)",
-  lineCenter:false
-  
-};
-var myChart = new Chartist.Line('.ct-chart', data, options);
-
-
-/* var ctx = document.getElementById("lineChart").getContext("2d");
-var lineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-                labels: {{labelsData | safe}},
-                datasets:[
-                    {
-                        label: "Data points",
-                        data: {{valuesData | safe}},
-                        fill : false,
-                        borderColor: "rgb(75 , 192 , 192)",
-                        lineTension: 0.1
-                    }
-                ]
-            },
-                
-    options: {
-        responsive: false
-        }
-    
-
-}
-); */
 </script>
 
 

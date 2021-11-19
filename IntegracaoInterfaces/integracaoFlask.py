@@ -1,8 +1,11 @@
 from flask import Flask , render_template
 from flask_material import Material
+import os
 
 app = Flask(__name__)
+
 app.config['TITLE'] = 'FINANCAS'
+
 Material(app)
 
 @app.route('/')
@@ -10,13 +13,26 @@ def index():
     products = ['Baguete', 'Ciabata', 'Pretzel']
     return render_template('index.html' , products=products )
 
-@app.route('/about')
-def about():
-    return render_template('about.html' )
+@app.route('/about' , methods = ['GET' , 'POST'])
+def about():    
+    
+    return render_template('about.html')
 
 @app.route('/valuation')
 def valuation():
     return render_template('valuation.html' )
+
+@app.route('/userRegister')
+def userRegister():
+    return render_template('userRegister.html' )
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html' )
+
+@app.route('/login')
+def login():
+    return render_template('login.html' )
 
 @app.route('/simulation')
 def simulation():

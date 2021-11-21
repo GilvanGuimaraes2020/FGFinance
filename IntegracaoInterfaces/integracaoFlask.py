@@ -1,6 +1,10 @@
-from flask import Flask , render_template
+from flask import Flask , render_template 
 from flask_material import Material
 import os
+
+import readIndicators
+
+indicators = readIndicators.cabecalho
 
 app = Flask(__name__)
 
@@ -11,11 +15,10 @@ Material(app)
 @app.route('/')
 def index():
     products = ['Baguete', 'Ciabata', 'Pretzel']
-    return render_template('index.html' , products=products )
+    return render_template('index.html' , products=products, dolar = indicators)
 
 @app.route('/about' , methods = ['GET' , 'POST'])
-def about():    
-    
+def about():        
     return render_template('about.html')
 
 @app.route('/valuation')
@@ -58,4 +61,5 @@ def pessoa(nome , cidade):
     return jsonify({'nome':nome , 'cidade':cidade}) """
 
 app.run(debug=True)
+
 

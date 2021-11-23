@@ -4,6 +4,7 @@ import os
 import requests
 os.system("cls")
 
+#VwsEUE9zelaX9J1eZ6sAs7CN2V5rfzZT709ET9Mr
 """ from pandas_datareader import data as web
 import pandas as pd
 #import yfinance as yf
@@ -23,10 +24,16 @@ dados = web.DataReader('PETR4.SA', data_source='yahoo', start= startAnalisys, en
 print(type(dados) ) """
 
 
-url = "https://www.yahoofinanceapi.com/yahoo-finance-api-specification.json"
-data = requests.get(url=url)
-r = requests.get(url)
-data = r.json()
-print(data['paths'].keys())
+
+url = "https://yfapi.net/v6/finance/quote"
+
+querystring = {"symbols":"PETR4.SA"}
+
+headers = {
+    'x-api-key': "VwsEUE9zelaX9J1eZ6sAs7CN2V5rfzZT709ET9Mr"
+    }
+
+responses = requests.request("GET", url, headers=headers, params=querystring).json()
+print (responses)
 
 

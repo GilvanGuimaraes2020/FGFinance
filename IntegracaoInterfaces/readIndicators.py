@@ -18,16 +18,48 @@ class Indicators:
         taxa_juro = todo['results']['taxes']        
         bolsa_valores = todo['results']['stocks']
         self.ibovespa = bolsa_valores['IBOVESPA']
-        self.dolar = moedas['USD']
-        self.euro = moedas['EUR']
+
+        self.ifix = bolsa_valores['IFIX']        
         self.selic = taxa_juro[0]['selic']
 
-    def retornos(self):
-        #return f"Dolar: R${round(self.dolar['buy'],2)}\tEuro: R${round(self.euro['buy'],2)}\tSelic: {round(self.selic,2)}%\tIbovespa: {round(self.ibovespa['variation'],2)}%"
-        datasReturn = {'dolar' : self.dolar, 'euro':self.euro }
-        return datasReturn
-    
+        self.nasdaq = bolsa_valores['NASDAQ']
+        self.dowjones = bolsa_valores['DOWJONES']
+        self.cac = bolsa_valores['CAC']
+        self.nikkei = bolsa_valores['NIKKEI']
+        self.dolar = moedas['USD']
+        self.bitcoin = moedas['BTC']
+        self.euro = moedas['EUR']
+        
 
-cabecalho = Indicators()
-print(cabecalho.dolar['buy'])
+class readData:
+    datas = []
+    dados = []
+    def __init__(self, ticker):
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=DNTIMB6HGSZAYR01'
+        
+        r = requests.get(url)
+        data = r.json()['Time Series (Daily)']
+        
+        # dados_empresa = ['1. open', '2. high', '3. low', '4. close', '5. volume'] 
+        dataFiltro = '2021-10'
+        data_filter = { k: v for (k ,v) in data.items() if dataFiltro in k}
+        
+        for (key , value) in data_filter.items():
+            self.datas.insert(0 , key)
+            self.dados.insert(0 , value['4. close'])
+        """ 
+        navegador = {
+            "User-Agent":"Chrome"
+        }
+        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=PETR4.SA&slice=year1month2&apikey=DNTIMB6HGSZAYR01'
+
+        r = requests.get(url=url, headers=navegador)
+        datas = r.json()
+        #data_filter = []
+        print(datas)
+        for value in datas:
+            print(value['fiscalDateEnding'])
+            #print (len(value.keys()))  """
+
+
 

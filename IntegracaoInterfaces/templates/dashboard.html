@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+{%  include 'head.html' %}
+
+<div class= "container grey-text">
+	<h4 class="center">Tela para dashboard</h4>
+    <h3 class="center">$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}}</h3>
+    <h3 class="center">€ {{'%0.2f'|format(dolar.euro['buy'] | float)}}</h3>
+    <h3 class="center">{{'%0.2f'|format(dolar.ifix['points'] | float)}}</h3>
+    <h3 class="center">{{'%0.2f'|format(dolar.ifix['variation'] | float)}}</h3>
+    <h3 class="center">$ {{'%0.2f'|format(dolar.bitcoin['buy'] | float)}}</h3>
+    <h3 class="center">R$ {{'%0.2f'|format(dolar.selic | float)}}</h3>
+	
+</div>
+
+	{% include 'footer.html' %}
+
+</html>

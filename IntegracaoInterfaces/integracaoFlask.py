@@ -4,7 +4,8 @@ import os
 
 import readIndicators
 
-indicators = readIndicators.cabecalho
+indicators = readIndicators.Indicators()
+
 
 app = Flask(__name__)
 
@@ -19,19 +20,19 @@ def index():
 
 @app.route('/about' , methods = ['GET' , 'POST'])
 def about():        
-    return render_template('about.html')
+    return render_template('about.html',dolar = indicators)
 
 @app.route('/valuation')
 def valuation():
-    return render_template('valuation.html' )
+    return render_template('valuation.html',dolar = indicators )
 
 @app.route('/userRegister')
 def userRegister():
-    return render_template('userRegister.html' )
+    return render_template('userRegister.html',dolar = indicators )
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods = ['post' , 'get'])
 def dashboard():
-    return render_template('dashboard.html' )
+    return render_template('dashboard.html',dolar = indicators )
 
 @app.route('/login')
 def login():
@@ -39,20 +40,11 @@ def login():
 
 @app.route('/simulation')
 def simulation():
-    data=[
-        ("01/01/2021" , 1000),
-        ("02/01/2021", 1300),
-        ("03/01/2021", 1400),
-        ("04/01/2021", 1500),
-        ("05/01/2021", 1800),
-        ("06/01/2021", 1900),
-        ("07/01/2021", 2000)
-    ]
-
-    labelsData = [row[0] for row in data] 
-    valuesData= [row[1] for row in data] 
-    print(labelsData)
-    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData)
+    graphicDatas = readIndicators.readData("IBOV.SA")
+    labelsData = graphicDatas.datas 
+    valuesData= graphicDatas.dados
+    
+    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators)
 
 """
 @app.route('/pessoas/<string:nome>/<string:cidade>')

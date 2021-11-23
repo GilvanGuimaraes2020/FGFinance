@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 <html>
-{%  include 'head.html' %}
+{%  include 'headInitial.html' %}
 
 <section class= "container grey-text">
 	<h4 class="center">Cadastrar Usuario</h4>
@@ -19,13 +19,13 @@
 		        <input type="text" name="sobrenome" value="">
             </div>
         </div>
-        		
-		<label> email </label>
-		<input type="text" name="email" value="">
-
-        <label> telefone </label>
-		<input type="text" name="telefone" value="">
 		
+			<label for="email"> email </label>
+			<input id="email" type="text" name="email" value="" class="validate">
+			
+			<label for="telefone"> telefone </label>
+			<input id="telefone" type="text" name="telefone" value="" class="validate">
+			
 		
 		<div class="center" style="margin: 10px 5px 10px 5px;">
 			<input type="submit" name="enviar" value="Enviar" class="btn-brand z-depth-0">

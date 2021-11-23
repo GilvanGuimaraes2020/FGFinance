@@ -8,21 +8,15 @@
 {% block content %}
     {% block header %}
 
-    {% include "head.html" %}
+    {% include "headInitial.html" %}
 
     {% endblock %}
-  <div class="container">
-    <h1>{{title}}</h1>
-    <div class="jumbotron">
-        <ul class="list-group">
-            {%for product in products%}
-                <li class="list-group-item">{{product}}</li>
-            {%endfor%}
-
-        </ul>
-        {{dolar}}
-    </div>
-  </div>
+  
+     <div class="center " style="margin-top: 20px;">
+      <span><button><a href="/userRegister">Cadastro</a></button></span>
+      <span><button><a href="/login">Login</a></button></span>
+     </div>
+  
 
 
 {% include "footer.html" %}

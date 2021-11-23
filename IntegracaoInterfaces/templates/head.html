@@ -17,21 +17,21 @@
     <div class="nav-wrapper">
       <div class="row">
         <div class="col s3"><a href="/" class="brand-logo" style="font-family: Tangerine , serif; font-size: 45px;">FGFinance</a> </div>
-        <div class="col s1">${{'%0.2f'|format(dolar.dolar['buy'] | float)}} </div>
-        <div class="col s1">€{{dolar.euro['buy']}} </div>
+        <div class="col s1">$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}} </div>
+        <div class="col s1">€ {{dolar.euro['buy']}}  </div>
         <div class="col s1">R${{dolar.selic}} </div>
         <div class="col s1">
           {% if dolar.ibovespa['variation'] < 0 %}
-            <span><i class="material-icons left">arrow_downward</i>{{dolar.ibovespa['variation']}}%</span>
+            <span><i class="material-icons left">arrow_downward</i>{{dolar.ibovespa['variation']}} %</span>
           {% else %}
-          <span><i class="material-icons left">arrow_upward</i>{{dolar.ibovespa['variation']}}%</span>
+          <span><i class="material-icons left">arrow_upward</i>{{dolar.ibovespa['variation']}} %</span>
           {% endif %}
           
         
         </div>
         <div class="col s5">
           <ul id="nav-mobile" class="right hide-on-med-and-down">        
-            <li><a href="/userRegister">Register</a></li>
+            <li><a href="/">Register</a></li>
             <li><a href="/valuation">Valuation</a></li>
             <li><a href="/simulation">Simulation</a></li>
             <li><a href="/about">About</a></li>

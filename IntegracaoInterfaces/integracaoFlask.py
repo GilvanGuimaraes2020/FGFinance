@@ -40,11 +40,13 @@ def login():
 
 @app.route('/simulation')
 def simulation():
+   
     graphicDatas = readIndicators.readData("IBOV.SA")
     labelsData = graphicDatas.datas 
     valuesData= graphicDatas.dados
-    
-    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators)
+    aux = []
+
+    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , aux = aux)
 
 """
 @app.route('/pessoas/<string:nome>/<string:cidade>')

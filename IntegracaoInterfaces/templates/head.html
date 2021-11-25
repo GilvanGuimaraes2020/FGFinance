@@ -19,7 +19,7 @@
         <div class="col s3"><a href="/" class="brand-logo" style="font-family: Tangerine , serif; font-size: 45px;">FGFinance</a> </div>
         <div class="col s1">$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}} </div>
         <div class="col s1">€ {{dolar.euro['buy']}}  </div>
-        <div class="col s1">R${{dolar.selic}} </div>
+        <div class="col s1">R$ {{dolar.selic}} </div>
         <div class="col s1">
           {% if dolar.ibovespa['variation'] < 0 %}
             <span><i class="material-icons left">arrow_downward</i>{{dolar.ibovespa['variation']}} %</span>

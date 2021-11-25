@@ -26,7 +26,18 @@
         {% include 'head.html' %}
 
 {% endblock %}
-  
+        
+    <div class="input-field">
+      <i class="material-icons prefix ">search</i>
+      <input name="buscaTicker" onchange="searchTicker(this.value)" type="text" class="validate">
+      
+        {%  if aux == [] %}
+       <p> Vazio  </p>
+       {% else %}
+       <p> Não Vazio  </p>
+        {% endif %}
+      
+    </div>
 
     <canvas id="myChart" ></canvas>
       
@@ -58,15 +69,22 @@
     },
       });
    
+     labelsData = [];
+     valuesData = [];
+
+      function searchTicker(value){
+        aux.push("teste");
+      }
 
 </script>
-
+    
 
 {% include "footer.html" %}
 
-
+  
 {% endblock %}
 
+    
 
 </html>
 

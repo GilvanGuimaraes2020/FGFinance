@@ -46,7 +46,7 @@ def simulation():
     valuesData= graphicDatas.dados
     aux = []
 
-    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , aux = aux)
+    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , auxs = aux)
 
 """
 @app.route('/pessoas/<string:nome>/<string:cidade>')

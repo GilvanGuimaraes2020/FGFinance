@@ -31,13 +31,18 @@
       <i class="material-icons prefix ">search</i>
       <input name="buscaTicker" onchange="searchTicker(this.value)" type="text" class="validate">
       
-        {%  if aux == [] %}
-       <p> Vazio  </p>
-       {% else %}
-       <p> Não Vazio  </p>
-        {% endif %}
+     
+
       
     </div>
+    <div>
+      <ul id="lista">
+        <li></li>
+      </ul>
+
+    </div>
+
+ 
 
     <canvas id="myChart" ></canvas>
       
@@ -69,11 +74,16 @@
     },
       });
    
-     labelsData = [];
-     valuesData = [];
+     
 
       function searchTicker(value){
-        aux.push("teste");
+       var ul = document.getElementById("lista")[0]
+        var elem  = document.createElement('li');
+        var texto = document.createTextNode("teste");
+        elem.appendChild(texto);
+        lista.appendChild(elem);
+       /*  var x = document.getElementById('showTickers');
+        x.value = value; */
       }
 
 </script>

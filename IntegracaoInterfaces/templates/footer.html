@@ -1,40 +1,59 @@
-
-
-   <footer class="page-footer" >
-    <!-- <hr class="my-4"> -->
-    <div class="divider"></div>
-    
-         <div class="row">
-             <div class="col s12 center grey-text">
-                 <font face="sans-serif" size="4">Desenvolvedores do Site</font>
-             </div>
-             
-                <div class="col s6">
-                    <div align="right">
-                        Gilvan Macedo Guimaraes
-                    </div>                 
+    <footer class="page-footer blue-grey darken-4" >
+        <div class="row">
+            <div class="col s6 center">
+                <div class="col s12 center grey-text">
+                    <font face="sans-serif" size="4">Menu</font>
                 </div>
-                <div class="col s6 ">
-                 Analista de Sistemas
-                </div>
-                <div class="col s6">
-                    <div align="right">
-                        Fernando de Oliveira Pina
-                    </div>                 
-                </div>
-                <div class="col s6 ">
-                 Analista de Software 
-                </div>
-                  
-
-       </div>
-
-       
-   
-                 
-                 <div class = "center grey-text">&copy; Copyright    2021 ADS FATEC</div>  
-            
-
+                <ul>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/valuation">Valuation</a></li>
+                    <li><a href="/simulation">Simulation</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+            <div class="col s6 center">
+                <font face="sans-serif" size="4" class="grey-text">Desenvolvedores da Aplicação</font>
+                <ul>
+                    <li style="color: rgb(41, 156, 194)">Analista de Sistemas:</li>
+                    <li style="font-size: 12px; color: lightblue">Gilvan Macedo Guimarães - gilvan@tecnologias.com.br</li>
+                    <li style="font-size: 12px; color: lightblue">Fernando de Oliveira Pina - f.pina@tecnologias.com.br</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class = "center grey-text">&copy; Copyright    2021 FG Finance</div>
     </footer>
+
+    <script type="text/javascript" src="js/materialize.min.js">
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var elems = document.querySelectorAll('.carousel');
+        //     var instances = M.Carousel.init(elems, options);
+        //     duration: 500;
+        // });
+        new Chart(document.getElementById("myChart"), {
+                type: 'line',
+                data: {
+                labels: {{labelsData | safe}},
+                datasets: [
+                    {
+                        label: "Population (millions)",
+                        borderColor: "#3e95cd",
+                        data: {{valuesData | safe}}
+                    }
+                ]
+                },
+                options: {
+                    responsive:true,
+                    title: {
+                        display: true,
+                        text: 'Total Confirmed Cases of COVID in May'
+                    }
+                },
+                    hover: {
+                    mode: 'index',
+                    intersect: true
+                },
+        });
+    </script>
     
 </body>

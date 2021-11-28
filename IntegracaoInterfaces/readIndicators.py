@@ -5,9 +5,6 @@ import requests
 import os
 
 class Indicators:
-    ibovespa = 0
-    dolar = 100
-
     def __init__(self):
         navegador = {
         "User-agent" : "Chrome"    }
@@ -17,18 +14,32 @@ class Indicators:
         moedas = todo['results']['currencies']        
         taxa_juro = todo['results']['taxes']        
         bolsa_valores = todo['results']['stocks']
-        self.ibovespa = bolsa_valores['IBOVESPA']
-
-        self.ifix = bolsa_valores['IFIX']        
+        
+        #Taxas de Juros
         self.selic = taxa_juro[0]['selic']
+        self.cdi = taxa_juro[0]['cdi']
 
+        #Bolsas e Fundo Imobiliário
+        self.ifix = bolsa_valores['IFIX']
+        self.ibovespa = bolsa_valores['IBOVESPA']
         self.nasdaq = bolsa_valores['NASDAQ']
         self.dowjones = bolsa_valores['DOWJONES']
         self.cac = bolsa_valores['CAC']
         self.nikkei = bolsa_valores['NIKKEI']
+
+        #Câmbio
         self.dolar = moedas['USD']
-        self.bitcoin = moedas['BTC']
         self.euro = moedas['EUR']
+        self.libra_esterlina = moedas['GBP']
+        self.peso_argentino = moedas['ARS']
+        self.dolar_canadense = moedas['CAD']
+        self.dolar_australiano = moedas['AUD']
+        self.yen_japones = moedas['JPY']
+        self.renminbi_china = moedas['CNY']
+
+        #Criptomoedas
+        self.bitcoin = moedas['BTC']
+        
         
 
 class readData:

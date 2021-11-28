@@ -1,46 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<head>
-  <title>Finanças</title>
-  
-  <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'> 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Tangerine">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script> 
-  
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+        <link href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <title>Finanças</title>
+        <style>
+            .menu ul li:hover {
+                background-color: black;
+            }
+            .indicators{
+                display: flex;
+                background-color: black;
+            }
+            .ind{
+                margin-left: 25px;
+                margin-right: 80px;
+            }
+            .cambio, .bolsa_de_valores, .taxa_juros{
+                margin: 10px;
+                padding: 5px;
+            }
+            .taxa_juros {
+                height: min-content;
+            }
+            .dashboard {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            .pesquisa {
+                width: 350px;
+                height: 60px;
+                border-radius: 30px;
+            }
+            #myChart {
+                background-color: white;
+            }
+        </style>
+    </head>
 
-<body> 
-  
-  <nav>
-    <div class="nav-wrapper">
-      <div class="row">
-        <div class="col s3"><a href="/" class="brand-logo" style="font-family: Tangerine , serif; font-size: 45px;">FGFinance</a> </div>
-        <div class="col s1">$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}} </div>
-        <div class="col s1">€ {{dolar.euro['buy']}}  </div>
-        <div class="col s1">R$ {{dolar.selic}} </div>
-        <div class="col s1">
-          {% if dolar.ibovespa['variation'] < 0 %}
-            <span><i class="material-icons left">arrow_downward</i>{{dolar.ibovespa['variation']}} %</span>
-          {% else %}
-          <span><i class="material-icons left">arrow_upward</i>{{dolar.ibovespa['variation']}} %</span>
-          {% endif %}
-          
-        
+    <body class="blue-grey darken-3 white-text">
+        <div id="barra_nav_indicators">
+            <nav>
+                <div class="nav-wrapper blue-grey darken-4">
+                    <div class="row">
+                        <div class="col s1">
+                            <a href="/dashboard" class="brand-logo yellow-text left" style="font-family: Tangerine , serif; font-size: 45px;">FG Finance</a>
+                        </div>
+                        
+                        <div class="col s11 menu">
+                            <ul id="nav-mobile" class="right">       
+                                <li class="active black"><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/valuation">Valuation</a></li>
+                                <li><a href="/simulation">Simulation</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/">Logoff</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="black white-text indicators">
+                <div class="ind">US$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}}</div>
+                <div class="ind">€ {{dolar.euro['buy']}} </div>
+                <div class="ind">SELIC {{dolar.selic}}% </div>
+                <div class="ind">
+                    {% if dolar.ibovespa['variation'] < 0 %}
+                        <span>IBOVESPA <i class="material-icons left red-text">arrow_drop_down</i>{{dolar.ibovespa['variation']}}%</span>
+                    {% else %}
+                        <span>IBOVESPA <i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{dolar.ibovespa['variation']}}%</span>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div class="col s5">
-          <ul id="nav-mobile" class="right hide-on-med-and-down">        
-            <li><a href="/">Register</a></li>
-            <li><a href="/valuation">Valuation</a></li>
-            <li><a href="/simulation">Simulation</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </div>
         
-        
-    </div>
-      </div>
-      
-  </nav>
-  

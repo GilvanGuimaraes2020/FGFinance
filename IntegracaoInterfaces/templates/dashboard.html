@@ -1,18 +1,267 @@
-<!DOCTYPE html>
-
-<html>
 {%  include 'head.html' %}
 
-<div class= "container grey-text">
-	<h4 class="center">Tela para dashboard</h4>
-    <h3 class="center">$ {{'%0.2f'|format(dolar.dolar['buy'] | float)}}</h3>
-    <h3 class="center">€ {{'%0.2f'|format(dolar.euro['buy'] | float)}}</h3>
-    <h3 class="center">{{'%0.2f'|format(dolar.ifix['points'] | float)}}</h3>
-    <h3 class="center">{{'%0.2f'|format(dolar.ifix['variation'] | float)}}</h3>
-    <h3 class="center">$ {{'%0.2f'|format(dolar.bitcoin['buy'] | float)}}</h3>
-    <h3 class="center">R$ {{'%0.2f'|format(dolar.selic | float)}}</h3>
-	
-</div>
+    <div class="text_dashboard">
+        <h4 class="center">Dashboard</h4>
+    </div>
+    <div class="dashboard">
+        <div class="teal lighten-1 cambio">
+            <h5 class="center">Câmbio</h5>
+            <hr>
+            <table>
+                <tr>
+                    <th>Moeda</th>
+                    <th>Valor [R$]</th>
+                    <th>Variação [%]</th>
+                </tr>
+                <tr>
+                    <td>Dólar Americano</td>
+                    <td>{{'%0.2f'|format(dolar.dolar['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.dolar['variation'] != 0 %}
+                            {% if dolar.dolar['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dolar['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.dolar['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.dolar['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Euro</td>
+                    <td>{{'%0.2f'|format(dolar.euro['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.euro['variation'] != 0 %}
+                            {% if dolar.euro['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.euro['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.euro['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.euro['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Libra Esterlina</td>
+                    <td>{{'%0.2f'|format(dolar.libra_esterlina['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.libra_esterlina['variation'] != 0 %}
+                            {% if dolar.libra_esterlina['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.libra_esterlina['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.libra_esterlina['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.libra_esterlina['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Peso Argentino</td>
+                    <td>{{'%0.2f'|format(dolar.peso_argentino['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.peso_argentino['variation'] != 0 %}
+                            {% if dolar.peso_argentino['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.peso_argentino['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.peso_argentino['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.peso_argentino['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Dólar Canadense</td>
+                    <td>{{'%0.2f'|format(dolar.dolar_canadense['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.dolar_canadense['variation'] != 0 %}
+                            {% if dolar.dolar_canadense['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dolar_canadense['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.dolar_canadense['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.dolar_canadense['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Dólar Australiano</td>
+                    <td>{{'%0.2f'|format(dolar.dolar_australiano['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.dolar_australiano['variation'] != 0 %}
+                            {% if dolar.dolar_australiano['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dolar_australiano['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.dolar_australiano['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.dolar_australiano['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Yen Japonês</td>
+                    <td>{{'%0.2f'|format(dolar.yen_japones['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.yen_japones['variation'] != 0 %}
+                            {% if dolar.yen_japones['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.yen_japones['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.yen_japones['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.yen_japones['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Renminbi Chinês</td>
+                    <td>{{'%0.2f'|format(dolar.renminbi_china['buy'] | float)}}</td>
+                    <td>
+                        {% if dolar.renminbi_china['variation'] != 0 %}
+                            {% if dolar.renminbi_china['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.renminbi_china['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.renminbi_china['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.renminbi_china['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="orange lighten-1 bolsa_de_valores">
+            <h5 class="center">Bolsas de Valores Mundiais</h5>
+            <h5 class="center">Fundo Imobiliário</h5>
+            <hr>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>País</th>
+                    <th>Pontos</th>
+                    <th>Variação [%]</th>
+                </tr>
+                <tr>
+                    <td>IFIX</td>
+                    <td>Brasil</td>
+                    <td>{{'%0.2f'|format(dolar.ifix['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.ifix['variation'] != 0 %}
+                            {% if dolar.ifix['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.ifix['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.ifix['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.ifix['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>IBOVESPA</td>
+                    <td>Brasil</td>
+                    <td>{{'%0.2f'|format(dolar.ibovespa['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.ibovespa['variation'] != 0 %}
+                            {% if dolar.ibovespa['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.ibovespa['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.ibovespa['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.ibovespa['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>NASDAQ</td>
+                    <td>Estados Unidos</td>
+                    <td>{{'%0.2f'|format(dolar.nasdaq['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.nasdaq['variation'] != 0 %}
+                            {% if dolar.nasdaq['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.nasdaq['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.nasdaq['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.nasdaq['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>DOWJONES</td>
+                    <td>Estados Unidos</td>
+                    <td>{{'%0.2f'|format(dolar.dowjones['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.dowjones['variation'] != 0 %}
+                            {% if dolar.dowjones['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dowjones['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.dowjones['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.dowjones['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>CAC</td>
+                    <td>França</td>
+                    <td>{{'%0.2f'|format(dolar.cac['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.cac['variation'] != 0 %}
+                            {% if dolar.cac['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.cac['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.cac['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.cac['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>NIKKEI</td>
+                    <td>Japão</td>
+                    <td>{{'%0.2f'|format(dolar.nikkei['points'] | float)}}</td>
+                    <td>
+                        {% if dolar.nikkei['variation'] != 0 %}
+                            {% if dolar.nikkei['variation'] < 0 %}
+                                <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
+                            {% else %}
+                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
+                            {% endif %}
+                        {% else %}
+                            <span>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="pink lighten-1 taxa_juros">
+            <h5 class="center">Taxa Básica de Juros</h5>
+            <hr>
+            <h6 class="center">Taxa Selic {{'%0.2f'|format(dolar.selic | float)}}%</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <h3>4</h3>
+            <canvas id="myChart" ></canvas>
+        </div>
+        <div class="col s4">
+            <h3>5</h3>
+        </div>
+        <div class="col s4">
+            <h3>6</h3>
+        </div>
+    </div>
 
 	{% include 'footer.html' %}
 

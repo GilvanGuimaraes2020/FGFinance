@@ -37,6 +37,8 @@ def valuation():
 def showvaluation():
     dados  = request.form
     initialValues = executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    flows = initialValues.flows()
+    
     return render_template('showvaluation.html', dolar=indicators, valuation = initialValues , dados = dados)
 
 @app.route('/userRegister')

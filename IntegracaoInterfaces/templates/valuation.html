@@ -1,25 +1,64 @@
-{% extends "material/base.html" %} 
-<!DOCTYPE html>
 
 <html>
-   {% block title %}{{config.get('TITLE')}}{% endblock %} 
-
-{% block content %}
-    {% block header %}
-
-    {% include "head.html" %}
-
-    {% endblock %}
-  <div class="container">
-    <h1>{{title}}</h1>
-   
-  </div>
-
-
-{% include "footer.html" %}
-
-
-{% endblock %}
-
-
-</html>
+  {% include 'head.html' %}
+  
+  <h3 class="center grey-text">Dados para executar valuation</h3> 
+  <form action="/showvaluation" class="white" method = "post" form = "formEvento">
+    
+    <div class="row">
+    
+        <div class="row">
+          <div class="input-field col s12">
+      <div class="white">
+        <label >Aliquota do Imposto de Renda</label>
+            <input name="aliqutoaIR" type="number"  class="validate">
+           </div> 
+          </div>       
+        </div>
+      
+      <div class="row">
+          <div class="input-field col s12">
+      <div class="white">
+        <label >Taxa de crescimento na perpetuidade</label>
+            <input name="growthPerpet" type="number" step="0.01"  class="validate">
+           </div> 
+          </div>       
+        </div>
+      
+      <div class="row">
+          <div class="input-field col s12">
+      <div class="white">
+        <label >Crescimento previsto</label>
+            <input name="growth" type="number" step="0.01"  class="validate">
+           </div> 
+          </div>       
+        </div>
+      
+      <div class="row">
+          <div class="input-field col s12">
+      <div class="white">
+        <label >Investimentos previstos</label>
+            <input name="reinvest" type="number" value="" class="validate">
+        
+        <input type="hidden" name = "idShow" value="" >
+           </div> 
+          </div>       
+        </div>
+      
+      <div class="row">	  
+      <div class="col s12">
+        <div class="center" style="margin-top: 10px;">
+        <input type="submit" name="salvarEvento" value="Salvar" class="btn-brand z-depth-0">
+      </div>
+      </div>
+      
+      </div>
+        
+      </form>
+    
+     
+          
+      {% include "footer.html"  %}
+  </html>
+  
+ 

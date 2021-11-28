@@ -1,47 +1,41 @@
-{% extends "material/base.html" %} 
-<!DOCTYPE html>
+   {% include "head.html" %}
+   <div class="container">
+      <h1>Análise Financeira</h1>
+      <p>Este software é sobre análise financeira.</p>
+      <br>
+      <p>Para um investidor a análise financeira é de extrema importância,
+      pois por meio dela ele se guiará para tomar as melhores decisões de
+      como e onde aplicará o seu dinheiro.</p>
+      <br>
+      <p>
+      No mundo dos investimentos a informação é a matéria prima para um
+      investidor se posicionar no melhor ativo finaceiro e também no melhor
+      momento. Portanto aqueles mais bem informados têm a chance de
+      diminuirem o risco envolvido nos investimentos.  
+      </p>
+      <br>
+      <p>
+      O objetivo desta aplicação não é recomendar a compra ou venda de ações
+      ou de qualquer outro tipo de ativo financeiro. O propósito é
+      concentrar informações para alimentar os investidores e estes poderem
+      analisá-las para tomar as suas próprias decisões. 
+      </p>
+      <br><br>
+      <div class="row">
+         <div class="col s6 center">
+            <img src="{{url_for('static' , filename='images/Fernando_APP.jpg')}}" style="width:250px;height:300px;"/>
+            <p>Fernando de Oliveira Pina</p>
+            <p>RA: 2840481923023</p>
+         </div>
+         <div class="col s6 center">
+            <img src="{{url_for('static' , filename='images/Gilvan_APP.jpg')}}"  style="width:250px;height:300px;">
+            <p>Gilvan Macedo Guimarães</p>
+            <p>RA: 2840481923009</p>
+         </div>
+      </div>
+      
+   </div>
 
-<html>
-   {% block title %}
-   {{config.get('TITLE')}}{% endblock %} 
-
-{% block content %}
-    {% block header %}
-
-        {% include "head.html" %}
-
-    {% endblock %}
-
- 
-<p>Este software eh sobre analise financeira.</p>
-
-<p>Para um investidor a analise financeira eh de extrema importancia,
-pois por meio dela ele se guiara para tomar as melhores decisoes de
-como e onde aplicara o seu dinheiro.</p>
-
-<p>
-  No mundo dos investimentos a informacao eh a materia prima para um
-investidor se posicionar no melhor ativo finaceiro e tambem no melhor
-momento. Portanto aqueles mais bem informados tem a chance de
-diminuirem o risco envolvido nos investimentos.  
-</p>
-
-<p>
-   O objetivo deste software nao eh recomendar a compra ou venda de acoes
-ou de qualquer outro tipo de ativo financeiro. O proposito eh
-concentrar informacoes para alimentar os investidores e estes poderem
-analisa-las para tomar as suas proprias decisoes. 
-</p>
-
-
-
-<img src="{{url_for('static' , filename='images/FernandoAPP.jpg')}}" style="width:300px;height:200px;"/>
-<img src="{{url_for('static' , filename='images/GilvanAPP.jpg')}}"  style="width:300px;height:200px;">
-
-{% include "footer.html" %}
-
-
-{% endblock %}
-
+   {% include "footer.html" %}
 
 </html>

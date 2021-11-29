@@ -21,7 +21,6 @@ Material(app)
 
 @app.route('/')
 def index():
-
     products = ['Baguete', 'Ciabata', 'Pretzel']
     return render_template('index.html' , products=products, dolar = indicators)
 
@@ -33,10 +32,13 @@ def about():
 def valuation():
     return render_template('valuation.html',dolar = indicators)
 
+
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
     initialValues = executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    flows = initialValues.flows()
+    
     return render_template('showvaluation.html', dolar=indicators, valuation = initialValues , dados = dados)
 
 @app.route('/userRegister')
@@ -56,13 +58,9 @@ def login():
 
 @app.route('/simulation')
 def simulation():
-   
-    graphicDatas = readIndicators.readData("IBOV.SA")
-    labelsData = graphicDatas.datas 
-    valuesData= graphicDatas.dados
     aux = []
-
     return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , auxs = aux)
 
 
 app.run(debug=True)
+

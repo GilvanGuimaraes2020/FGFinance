@@ -7,7 +7,7 @@ class initialValues:
     flcFuturo = []
 
     def __init__(self, irRate, growthPerpet, growth, reinvest, costCapital) :
-        self.growtPerpet = growthPerpet
+        self.growthPerpet = growthPerpet
         self.growth = growth
         self.reinvest = reinvest
         self.costCapital = costCapital
@@ -32,5 +32,5 @@ class initialValues:
         enterpriseValue = sum(fDesc)
         qualityValue = enterpriseValue + self.cash
         stockPrice = round(qualityValue / self.quantityStock * pow(10 , 6) , 3)
-
+        return ({'fclPerpet' : fclPerpet}, {'fclTerminal':fclTerminal})
 

@@ -1,6 +1,7 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 import os
+import exportFile 
 
 import executeValuation
 
@@ -37,9 +38,8 @@ def valuation():
 def showvaluation():
     dados  = request.form
     initialValues = executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
-    flows = initialValues.flows()
-    
-    return render_template('showvaluation.html', dolar=indicators, valuation = initialValues , dados = dados)
+    flows = initialValues.flows()    
+    return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
 
 @app.route('/userRegister')
 def userRegister():
@@ -60,6 +60,19 @@ def login():
 def simulation():
     aux = []
     return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , auxs = aux)
+
+@app.route('/exportFiles' , methods = ['post' , 'get'])
+def exportFiles():
+    dados  = request.form
+    
+    if (dados['method'] == "json"):
+        exportFile.jsonCreate(dados)
+    elif (dados['method'] == "csv"):
+       exportFile.csvCreate(dados['stockPrice'] , dados['enterpriseValue'])     
+    else:
+        print("Sem dados")
+      
+    return render_template('exportFiles.html', dolar=indicators)
 
 
 app.run(debug=True)

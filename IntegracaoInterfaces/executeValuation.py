@@ -32,5 +32,7 @@ class initialValues:
         enterpriseValue = sum(fDesc)
         qualityValue = enterpriseValue + self.cash
         stockPrice = round(qualityValue / self.quantityStock * pow(10 , 6) , 3)
-        return ({'fclPerpet' : fclPerpet}, {'fclTerminal':fclTerminal})
+        return {'fclPerpet' : fclPerpet ,'fclTerminal':fclTerminal, 'flcFuture':self.flcFuturo,
+        'fDesc' : fDesc, 'enterpriseValue':enterpriseValue, 'qualityValue' : qualityValue,
+        'stockPrice':stockPrice}
 

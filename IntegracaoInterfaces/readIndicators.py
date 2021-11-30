@@ -43,9 +43,11 @@ class Indicators:
         
 
 class readData:
-    datas = []
-    dados = []
-    def __init__(self, ticker):
+    
+    def teste(ticker):
+        datas = []
+        dados = []
+        volume = []
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=DNTIMB6HGSZAYR01'
         
         r = requests.get(url)
@@ -56,9 +58,10 @@ class readData:
         data_filter = { k: v for (k ,v) in data.items() if dataFiltro in k}
         
         for (key , value) in data_filter.items():
-            self.datas.insert(0 , key)
-            self.dados.insert(0 , value['4. close'])
-       
+            datas.insert(0 , key)
+            dados.insert(0 , value['4. close'])
+            volume.insert(0 , value['5. volume'] )
+        return (datas , dados , volume) 
 
 
 

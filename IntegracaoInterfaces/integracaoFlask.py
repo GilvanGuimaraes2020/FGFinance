@@ -10,9 +10,10 @@ import readIndicators
 """ executeValuation(24 , 0.03, 0.065, 1.2, 0.1) """
 
 indicators = readIndicators.Indicators()
-graphicDatas = readIndicators.readData("IBOV.SA")
-labelsData = graphicDatas.datas 
-valuesData= graphicDatas.dados
+
+def initialState(ticker):
+    return readIndicators.readData.teste(ticker)
+    
 
 app = Flask(__name__)
 
@@ -47,19 +48,22 @@ def userRegister():
 
 @app.route('/dashboard', methods = ['post' , 'get'])
 def dashboard():
-    ticker = "PETR4.SA"
-    graphicDatasGenerico = readIndicators.readData(ticker)
-    graphicDatasIBOV = readIndicators.readData("IBOV.SA")
-    return render_template('dashboard.html',graphicDatasIBOV=graphicDatasIBOV, graphicDatasGenerico=graphicDatasGenerico, ticker=ticker, dolar = indicators)
+    return render_template('dashboard.html', dolar = indicators)
 
 @app.route('/login')
 def login():
     return render_template('login.html' )
 
-@app.route('/simulation')
-def simulation():
-    aux = []
-    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , auxs = aux)
+@app.route('/simulation' , methods=['post' , 'get'])
+def simulation():    
+    requestHtml = request.args  
+    if requestHtml:
+        (labels , values) = initialState("PETR4.SA")
+    else:
+       (labels , values) = initialState("IBOV.SA") 
+    
+    
+    return render_template('simulation.html', labelsData=labels, valuesData = values ,dolar = indicators )
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])
 def exportFiles():

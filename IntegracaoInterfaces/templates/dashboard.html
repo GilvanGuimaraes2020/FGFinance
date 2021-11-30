@@ -16,7 +16,7 @@
                 <tr>
                     <td>Dólar Americano</td>
                     <td>{{'%0.2f'|format(dolar.dolar['buy'] | float)}}</td>
-                    <td>
+                    <td style="text-align: right;">
                         {% if dolar.dolar['variation'] != 0 %}
                             {% if dolar.dolar['variation'] < 0 %}
                                 <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dolar['variation'] | float)}}</span>
@@ -251,18 +251,70 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s4">
+        <div class="col s6">
             <h3>4</h3>
-            <canvas id="myChart" ></canvas>
+            <canvas id="chartOne" ></canvas>
         </div>
-        <div class="col s4">
+        <div class="col s6">
             <h3>5</h3>
+            <canvas id="chartTwo" ></canvas>
         </div>
-        <div class="col s4">
-            <h3>6</h3>
-        </div>
+        
     </div>
 
 	{% include 'footer.html' %}
+<script>
+    new Chart(document.getElementById("chartOne"), {
+            type: 'line',
+            data: {
+              labels: {{labelsData | safe}},
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  borderColor: "#3e95cd",
+                  backgroundColor: "#3e95cd",                  
+                  data: {{valuesData | safe}},
+                  
+                }    
+              ]
+            },
+            options: {
+              responsive:true,
+              title: {
+                display: true,
+                text: 'Total Confirmed Cases of COVID in May'
+              }
+            },
+            hover: {
+      mode: 'index',
+      intersect: true
+      },
+        });
 
+        new Chart(document.getElementById("chartTwo"), {
+            type: 'bar',
+            data: {
+              labels: {{labelsData | safe}},
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  borderColor: "#3e95cd",
+                  backgroundColor: "#3e95cd",
+                  data: {{volume | safe}}
+                }
+              ]
+            },
+            options: {
+              responsive:true,
+              title: {
+                display: true,
+                text: 'Total Confirmed Cases of COVID in May'
+              }
+            },
+            hover: {
+      mode: 'index',
+      intersect: true
+      },
+        });
+</script>
 </html>

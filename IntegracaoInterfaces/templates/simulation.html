@@ -14,18 +14,29 @@
   <canvas id="myChart" ></canvas>
       
   <script>
-    // Line Chart
-    new Chart(document.getElementById("myChart"), {
+    var label = {{labelsData | safe}};
+    var dados = [
+      {
+        borderColor: "#3e95cd", 
+        data: {{valuesData | safe}}
+      } ,
+      /* {
+        borderColor: "#3ecd3e", 
+        data: [4 , 5 , 6]
+      } ,
+      {
+        borderColor: "#cd813e", 
+        data: [7 , 8 , 9]
+      } , */
+
+    ]
+
+    const ctx = document.getElementById("myChart")
+    const mychart  = new Chart(ctx, {
             type: 'line',
             data: {
-              labels: {{labelsData | safe}},
-              datasets: [
-                {
-                  label: "Population (millions)",
-                  borderColor: "#3e95cd",
-                  data: {{valuesData | safe}}
-                }
-              ]
+              labels: label,
+              datasets: dados
             },
             options: {
               responsive:true,
@@ -35,8 +46,8 @@
               }
             },
             hover: {
-      mode: 'index',
-      intersect: true
+     
+      intersect: false
       },
         });
     
@@ -46,6 +57,9 @@
           var texto = document.createTextNode("teste");
           elem.appendChild(texto);
           lista.appendChild(elem);
+          document.location = "/simulation?ticker=" + value;
+          
+          
         /*  var x = document.getElementById('showTickers');
           x.value = value; */
         }

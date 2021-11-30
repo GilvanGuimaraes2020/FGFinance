@@ -54,9 +54,9 @@ fDesc[len(fDesc) - 1] = round(flcFuturo[len(flcFuturo) - 1] + fclTerminal / pow(
 enterpriseValue = sum(fDesc)
 #Soma-se os caixas e subtrai as obrigaçoes da empresa
 cash =  599.1 +  409.1 -  130.7 - 182.0 - 325.2 
-qualityValue = enterpriseValue + cash
+equityValue = enterpriseValue + cash
 quantityStock = 190591464
-stockPrice = round(qualityValue / quantityStock * pow(10 , 6) , 3)
+stockPrice = round(equityValue / quantityStock * pow(10 , 6) , 3)
 print(depAm)
 print(ir)
 print(nopat)

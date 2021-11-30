@@ -16,7 +16,7 @@
                 <tr>
                     <td>Dólar Americano</td>
                     <td>{{'%0.2f'|format(dolar.dolar['buy'] | float)}}</td>
-                    <td>
+                    <td style="text-align: right;">
                         {% if dolar.dolar['variation'] != 0 %}
                             {% if dolar.dolar['variation'] < 0 %}
                                 <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.dolar['variation'] | float)}}</span>

@@ -251,18 +251,42 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s4">
+        <div class="col s6">
             <h3>4</h3>
-            <canvas id="myChart" ></canvas>
+            <canvas id="chartOne" ></canvas>
         </div>
-        <div class="col s4">
+        <div class="col s6">
             <h3>5</h3>
+            <canvas id="chartTwo" ></canvas>
         </div>
-        <div class="col s4">
-            <h3>6</h3>
-        </div>
+        
     </div>
 
 	{% include 'footer.html' %}
-
+<script>
+    new Chart(document.getElementById("chartOne"), {
+            type: 'line',
+            data: {
+              labels: {{labelsData | safe}},
+              datasets: [
+                {
+                  label: "Population (millions)",
+                  borderColor: "#3e95cd",
+                  data: {{valuesData | safe}}
+                }
+              ]
+            },
+            options: {
+              responsive:true,
+              title: {
+                display: true,
+                text: 'Total Confirmed Cases of COVID in May'
+              }
+            },
+            hover: {
+      mode: 'index',
+      intersect: true
+      },
+        });
+</script>
 </html>

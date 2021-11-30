@@ -13,7 +13,9 @@ indicators = readIndicators.Indicators()
 
 def initialState(ticker):
     return readIndicators.readData.teste(ticker)
-    
+
+def funcValuation():
+    return executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
 app = Flask(__name__)
 
@@ -38,7 +40,7 @@ def valuation():
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
-    initialValues = executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    initialValues = funcValuation()
     flows = initialValues.flows()    
     return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
 

@@ -17,6 +17,9 @@ def initialState(ticker):
 def funcValuation():
     return executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
+def queryTicker(ticker):
+    return readIndicators.exteriorTicker(ticker)
+
 app = Flask(__name__)
 
 app.config['TITLE'] = 'FINANCAS'
@@ -32,9 +35,16 @@ def index():
 def about():        
     return render_template('about.html',dolar = indicators)
 
-@app.route('/valuation')
+@app.route('/valuation' , methods = ['post' , 'get'])
 def valuation():
-    return render_template('valuation.html',dolar = indicators)
+    requestHtml = request.args
+    print(requestHtml)
+    if requestHtml:
+
+        return render_template('valuation.html',dolar = indicators)
+    else:
+        return render_template('valuation.html',dolar = indicators)
+
 
 
 @app.route('/showvaluation' , methods = ['post' , 'get'])
@@ -63,7 +73,7 @@ def login():
 def simulation():    
     requestHtml = request.args  
     if requestHtml:
-        (labels , values , volume) = initialState("PETR4.SA")
+        (labels , values , volume) = initialState(requestHtml['ticker'])
     else:
        (labels , values, volume) = initialState("IBOV.SA") 
     

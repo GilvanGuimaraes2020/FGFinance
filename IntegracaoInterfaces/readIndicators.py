@@ -1,5 +1,6 @@
 
 #Implementar classe para buscar os indicadores
+import csv
 import json
 import requests
 import os
@@ -51,6 +52,7 @@ class readData:
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=DNTIMB6HGSZAYR01'
         
         r = requests.get(url)
+        
         data = r.json()['Time Series (Daily)']
         
         # dados_empresa = ['1. open', '2. high', '3. low', '4. close', '5. volume'] 
@@ -63,5 +65,14 @@ class readData:
             volume.insert(0 , value['5. volume'] )
         return (datas , dados , volume) 
 
+class exteriorTicker:
 
-
+    def queryTicker(ticker):
+        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo"
+        with requests.Session() as s:
+            download = s.get(CSV_URL)
+            decoded_content = download.content.decode('utf-8')
+            cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+            my_list = list(cr)
+            for row in my_list:
+                print(row)    

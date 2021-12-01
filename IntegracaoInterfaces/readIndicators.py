@@ -67,8 +67,8 @@ class readData:
 
 class exteriorTicker:
 
-    def queryTicker(ticker):
-        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo"
+    def queryTicker():
+        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=DNTIMB6HGSZAYR01"
         with requests.Session() as s:
             download = s.get(CSV_URL)
             decoded_content = download.content.decode('utf-8')
@@ -76,3 +76,58 @@ class exteriorTicker:
             my_list = list(cr)
             for row in my_list:
                 print(row)    
+
+
+class IndicatorsExterior:
+
+    #fiscalDateEnding data fiscal todas as apis
+    #Açoes em circulaçao: "SharesOutstanding"(overview)
+    #https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+    #
+    #ebit , ebitda = "ebit", "ebitda" (income-statement)
+    #
+    #passivoFE = 
+    #workingCapital= currentNetReceivables - currentAccountsPayable(balane-sheet)
+    #https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo
+    #cashAndEquivalent.append(data['changeInCashAndCashEquivalents'])
+    #caixa: cashAndCashEquivalentsAtCarryingValue + propertyPlantEquipment (balance-sheet)
+    # - dividendPayout (cash-flow)
+    
+    def cash_flow(ticker):            
+        debtCash = []
+        
+        url = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
+        r = requests.get(url)
+        datas = r.json()['annualReports']
+        for data in datas:                
+            debtCash.append(int(data['cashflowFromFinancing']) + int(data['dividendPayout']))
+        return debtCash    
+        
+
+    def balance_sheet(ticker):
+        workingCapital = []      
+        cashAndEquivalent = []                 
+        url = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
+        x = requests.get(url)
+        datas2 = x.json()['annualReports']
+        for data in datas2:
+            workingCapital.append(int(data['currentNetReceivables']) - int(data['currentAccountsPayable'])) 
+            cashAndEquivalent.append(int(data['cashAndShortTermInvestments']) + int(data['propertyPlantEquipment']))               
+        return (workingCapital , cashAndEquivalent)
+
+    def income_statement(ticker):    
+        ebit = []      
+        ebitda = []                 
+        url = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
+        y = requests.get(url)
+        datas3 = y.json()["annualReports"]
+        for data in datas3:
+            ebit.append(int(data['ebit'])) 
+            ebitda.append(int(data['ebitda']))
+        return(ebit , ebitda)
+
+    def overview( ticker):          
+        url = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
+        z = requests.get(url)
+        quantityStock = z.json()['SharesOutstanding']
+        return int(quantityStock) 

@@ -1,6 +1,7 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 import os
+import executeValuation
 import exportFile 
 
 import executeValuation
@@ -17,8 +18,8 @@ def initialState(ticker):
 def funcValuation():
     return executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
-def queryTicker(ticker):
-    return readIndicators.exteriorTicker(ticker)
+def valuesExterior():
+    return executeValuation.ValuesExterior(18, 0.1, 1.2, 0.1)
 
 app = Flask(__name__)
 
@@ -40,8 +41,8 @@ def valuation():
     requestHtml = request.args
     print(requestHtml)
     if requestHtml:
-
-        return render_template('valuation.html',dolar = indicators)
+        datasToSend = valuesExterior()
+        return render_template('valuation.html',dolar = indicators , datasToSend = datasToSend)
     else:
         return render_template('valuation.html',dolar = indicators)
 

@@ -23,32 +23,5 @@
         
         <div class = "center grey-text">&copy; Copyright    2021 FG Finance</div>
     </footer>
-
-    <script type="text/javascript" src="js/materialize.min.js">
-        new Chart(document.getElementById("myChart"), {
-                type: 'line',
-                data: {
-                labels: {{labelsData | safe}},
-                datasets: [
-                    {
-                        label: "Population (millions)",
-                        borderColor: "#3e95cd",
-                        data: {{valuesData | safe}}
-                    }
-                ]
-                },
-                options: {
-                    responsive:true,
-                    title: {
-                        display: true,
-                        text: 'Total Confirmed Cases of COVID in May'
-                    }
-                },
-                    hover: {
-                    mode: 'index',
-                    intersect: true
-                },
-        });
-    </script>
     
 </body>

@@ -58,7 +58,3 @@ class readData:
         for (key , value) in data_filter.items():
             self.datas.insert(0 , key)
             self.dados.insert(0 , value['4. close'])
-       
-
-
-

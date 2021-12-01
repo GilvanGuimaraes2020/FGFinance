@@ -12,6 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
         <title>Finanças</title>
         <style>
             .menu ul li:hover {
@@ -20,16 +21,20 @@
             .indicators{
                 display: flex;
                 background-color: black;
+                overflow: auto;
             }
             .ind{
                 margin-left: 25px;
                 margin-right: 80px;
             }
-            .cambio, .bolsa_de_valores, .taxa_juros{
+            .cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
                 margin: 10px;
                 padding: 5px;
             }
             .taxa_juros {
+                height: min-content;
+            }
+            .criptomoedas {
                 height: min-content;
             }
             .dashboard {
@@ -42,8 +47,13 @@
                 height: 60px;
                 border-radius: 30px;
             }
-            #myChart {
-                background-color: white;
+            .cards_entrada {
+                display: grid;
+            }
+            .quadro_cadastro, .quadro_login {
+                width: 100px;
+                height: 100px;
+                padding: 30px;
             }
         </style>
     </head>
@@ -59,7 +69,7 @@
                         
                         <div class="col s11 menu">
                             <ul id="nav-mobile" class="right">       
-                                <li class="active black"><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/dashboard">Dashboard</a></li>
                                 <li><a href="/valuation">Valuation</a></li>
                                 <li><a href="/simulation">Simulation</a></li>
                                 <li><a href="/about">About</a></li>

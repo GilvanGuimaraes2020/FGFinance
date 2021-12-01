@@ -1,4 +1,5 @@
 import readIndicators
+
 class initialValues:
     
     ebit = [490.93, 338.93, 580.95, 887.69, 1081.55]
@@ -41,7 +42,7 @@ class initialValues:
 class ValuesExterior:
     
     quantityStock = readIndicators.IndicatorsExterior.overview("IBM")
-    (ebit , ebitda) = readIndicators.IndicatorsExterior.income_statement("IBM")
+    #(ebit , ebitda) = readIndicators.IndicatorsExterior.income_statement("IBM")
     (working , cashEquivalent) = readIndicators.IndicatorsExterior.balance_sheet("IBM")
     debt = readIndicators.IndicatorsExterior.cash_flow("IBM")
     ncl = [(a - b) for a ,b in zip(cashEquivalent , debt) ]

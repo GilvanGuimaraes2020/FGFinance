@@ -1,14 +1,14 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 import os
-import executeValuation
+from executeValuation import initialValues , ValuesExterior as stocksEx
+
 import exportFile 
 
-import executeValuation
+
+
 
 import readIndicators
-
-""" executeValuation(24 , 0.03, 0.065, 1.2, 0.1) """
 
 indicators = readIndicators.Indicators()
 
@@ -16,10 +16,10 @@ def initialState(ticker):
     return readIndicators.readData.teste(ticker)
 
 def funcValuation():
-    return executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    return initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
 def valuesExterior():
-    return executeValuation.ValuesExterior(18, 0.1, 1.2, 0.1)
+    return stocksEx(18, 0.1, 1.2, 0.1)
 
 app = Flask(__name__)
 

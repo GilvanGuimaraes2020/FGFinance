@@ -120,7 +120,7 @@ class IndicatorsExterior:
         ebitda = []                 
         url = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
         y = requests.get(url)
-        datas3 = y.json()["annualReports"]
+        datas3 = y.json()['annualReports']
         for data in datas3:
             ebit.append(int(data['ebit'])) 
             ebitda.append(int(data['ebitda']))

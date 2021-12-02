@@ -1,21 +1,26 @@
+
 from flask import Flask , render_template , request
 from flask_material import Material
-import os
-from connectionBD import create
+
+import connectionDataBase.connectionBD as BD
+
+
 #from teste import cashFlow
-from executeValuation import initialValues
+from valuation.executeValuation import initialValues
 
 
-import exportFile 
+import getFiles.exportFile  as exportFile
 
-import readIndicators
+import indicators.readIndicators as readIndicators
 
 indicators = readIndicators.Indicators()
 
 def initialState(ticker):
     return readIndicators.readData.teste(ticker)
 
-def funcValuation():
+def funcValuation(dados):
+    for (k , v) in dados.items():
+        print(v)
     return initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
 """ def valuesExterior():
@@ -54,8 +59,8 @@ def valuation():
 def showvaluation():
     dados  = request.form
     if request.method == "POST":
-            print ("POST") 
-    initialValues = funcValuation()
+        print (dados['ebit1']) 
+    initialValues = funcValuation(dados)
     flows = initialValues.flows()    
     return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
 
@@ -74,7 +79,7 @@ def dashboard():
 def login():
     if request.method == "POST":
         datas_DB = request.form
-        create(datas_DB['nome'] , datas_DB['email'])
+        BD.create(datas_DB['nome'] , datas_DB['email'])
     return render_template('login.html' )
 
 @app.route('/simulation' , methods=['post' , 'get'])

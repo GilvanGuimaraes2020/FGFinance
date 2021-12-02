@@ -85,11 +85,10 @@
       
       <div class="row">
           <div class="input-field col s12">
-      <div class="white">
-        <label >Investimentos previstos</label>
-            <input name="reinvest" type="number" value="" class="validate">
+            <div class="white">
+              <label >Investimentos previstos</label>
+              <input name="reinvest" type="number" value="" class="validate">
         
-        <input type="hidden" name = "idShow" value="" >
            </div> 
           </div>       
         </div>
@@ -115,13 +114,13 @@
         }        
         
       } 
+      //Esta funçao buscara os tickers automaticamente para executar
+      // valuation
       function searchTicker(value){
         
           document.location = "/valuation?ticker=" + value;
           
-          
-        /*  var x = document.getElementById('showTickers');
-          x.value = value; */
+         
         }
     </script>
      

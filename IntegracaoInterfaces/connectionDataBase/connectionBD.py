@@ -1,5 +1,6 @@
-from os import curdir as cur
+
 import psycopg2
+
 
 def connection():
     pg = psycopg2
@@ -16,6 +17,7 @@ def connection():
 
     except Exception as erro:
         print (erro)
+
 
 def create(nmUsuario , email):
     try:

@@ -1,5 +1,6 @@
 
 #Implementar classe para buscar os indicadores
+import csv
 import json
 import requests
 import os
@@ -43,12 +44,15 @@ class Indicators:
         
 
 class readData:
-    datas = []
-    dados = []
-    def __init__(self, ticker):
+    
+    def teste(ticker):
+        datas = []
+        dados = []
+        volume = []
         url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=DNTIMB6HGSZAYR01'
         
         r = requests.get(url)
+        
         data = r.json()['Time Series (Daily)']
         
         # dados_empresa = ['1. open', '2. high', '3. low', '4. close', '5. volume'] 
@@ -56,5 +60,40 @@ class readData:
         data_filter = { k: v for (k ,v) in data.items() if dataFiltro in k}
         
         for (key , value) in data_filter.items():
+<<<<<<< HEAD
             self.datas.insert(0 , key)
             self.dados.insert(0 , value['4. close'])
+=======
+            datas.insert(0 , key)
+            dados.insert(0 , value['4. close'])
+            volume.insert(0 , value['5. volume'] )
+        return (datas , dados , volume) 
+
+class exteriorTicker:
+
+    def queryTicker():
+        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=DNTIMB6HGSZAYR01"
+        with requests.Session() as s:
+            download = s.get(CSV_URL)
+            decoded_content = download.content.decode('utf-8')
+            cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+            my_list = list(cr)
+            for row in my_list:
+                print(row)    
+
+
+
+    #fiscalDateEnding data fiscal todas as apis
+    #Açoes em circulaçao: "SharesOutstanding"(overview)
+    #https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+    #
+    #ebit , ebitda = "ebit", "ebitda" (income-statement)
+    #
+    #passivoFE = 
+    #workingCapital= currentNetReceivables - currentAccountsPayable(balane-sheet)
+    #https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo
+    #cashAndEquivalent.append(data['changeInCashAndCashEquivalents'])
+    #caixa: cashAndCashEquivalentsAtCarryingValue + propertyPlantEquipment (balance-sheet)
+    # - dividendPayout (cash-flow)
+    
+>>>>>>> 2de4ab408f03f194926fae51ce9ab8c1517847dc

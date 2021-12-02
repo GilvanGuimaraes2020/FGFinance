@@ -14,41 +14,59 @@
   <canvas id="myChart" ></canvas>
       
   <script>
-    // Line Chart
-    new Chart(document.getElementById("myChart"), {
-      type: 'line',
-      data: {
-        labels: {{labelsData | safe}},
-        datasets: [
-          {
-            label: "Population (millions)",
-            borderColor: "#3e95cd",
-            data: {{valuesData | safe}}
-          }
-        ]
-      },
-      options: {
-        responsive:true,
-        title: {
-          display: true,
-          text: 'Total Confirmed Cases of COVID in May'
-        }
-      },
-      hover: {
-      mode: 'index',
-      intersect: true
+
+    var label = {{labelsData | safe}};
+    var dados = [
+      {
+        borderColor: "#3e95cd", 
+        data: {{valuesData | safe}}
+      } ,
+      /* {
+        borderColor: "#3ecd3e", 
+        data: [4 , 5 , 6]
+      } ,
+      {
+        borderColor: "#cd813e", 
+        data: [7 , 8 , 9]
+      } , */
+
+    ]
+
+    const ctx = document.getElementById("myChart")
+    const mychart  = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: label,
+              datasets: dados
+            },
+            options: {
+              responsive:true,
+              title: {
+                display: true,
+                text: 'Total Confirmed Cases of COVID in May'
+              }
+            },
+            hover: {
+     
+      intersect: false
+
       },
     });
     
-    function searchTicker(value){
-      var ul = document.getElementById("lista")[0]
-      var elem  = document.createElement('li');
-      var texto = document.createTextNode("teste");
-      elem.appendChild(texto);
-      lista.appendChild(elem);
-    /*  var x = document.getElementById('showTickers');
-      x.value = value; */
-    }
+
+        function searchTicker(value){
+        var ul = document.getElementById("lista")[0]
+          var elem  = document.createElement('li');
+          var texto = document.createTextNode("teste");
+          elem.appendChild(texto);
+          lista.appendChild(elem);
+          document.location = "/simulation?ticker=" + value;
+          
+          
+        /*  var x = document.getElementById('showTickers');
+          x.value = value; */
+        }
+
   </script>
 
   {% include "footer.html" %}

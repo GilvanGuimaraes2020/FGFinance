@@ -2,8 +2,20 @@
 <html>
 
   {% include 'head.html' %}
+  <div class="row">
+    <div class="col s6">
+      <div class="input-field pesquisa blue-grey lighten-1">
+          <i class="material-icons prefix ">search</i>
+          <input name="buscaTicker" onchange="searchTicker(this.value)" type="text" class="validate">
+        </div>
+    </div>
+    <div class="col s6">
+     <h3 class="center grey-text">Executar valuation</h3> 
+
+    </div>
+  </div>
   
-  <h3 class="center grey-text">Dados para executar valuation</h3> 
+  
   <form action="/showvaluation" class="white" method = "post" form = "formEvento">
     
     <div class="row">
@@ -17,13 +29,49 @@
           </div>       
         </div>
       
-      <div class="row">
-          <div class="input-field col s12">
-      <div class="white">
-        <label >Taxa de crescimento na perpetuidade</label>
-            <input name="growthPerpet" type="number" step="0.01"  class="validate">
-           </div> 
-          </div>       
+      
+        <label >Valores para realizar valuation</label>
+      <div style="padding: 5px;">  
+        <table class="striped">
+          <thead>
+            <tr>
+                <th> </th>
+                <th style="color:black"><label id="head1">unload  </label></th>
+                <th style="color:black"><label id="head2"> unload </label></th>
+                <th style="color:black"><label id="head3"> unload </label></th>
+                <th style="color:black"><label id="head4">unload  </label></th>
+                <th style="color:black"><label id="head5"> unload </label></th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr>
+              <td><label>EBIT</label></td>
+              <td><input type="number" name="ebit1"></td>
+              <td><input type="number" name="ebit2"></td>
+              <td><input type="number" name="ebit3"></td>
+              <td><input type="number" name="ebit4"></td>
+              <td><input type="number" name="ebit5"></td>
+            </tr>
+            <tr>
+              <td><label>EBITDA</label></td>
+              <td><input type="number" name="ebitda1"></td>
+              <td><input type="number" name="ebitda2"></td>
+              <td><input type="number" name="ebitda3"></td>
+              <td><input type="number" name="ebitda4"></td>
+              <td><input type="number" name="ebitda5"></td>
+            </tr>
+            <tr>
+              <td><label>CG</label></td>
+              <td><input type="number" name="cg1"></td>
+              <td><input type="number" name="cg2"></td>
+              <td><input type="number" name="cg3"></td>
+              <td><input type="number" name="cg4"></td>
+              <td><input type="number" name="cg5"></td>
+            </tr>
+           </tbody>
+        </table>
+      
         </div>
       
       <div class="row">
@@ -57,7 +105,25 @@
         
       </form>
 
-    
+    <script>
+      window.onload = function(){
+        var actualYear = new Date();
+        for (var i = 5; i > 0 ; i-- ){
+          var head = document.getElementById("head" + i);
+          head.textContent = actualYear.getFullYear() - i;
+          
+        }        
+        
+      } 
+      function searchTicker(value){
+        
+          document.location = "/valuation?ticker=" + value;
+          
+          
+        /*  var x = document.getElementById('showTickers');
+          x.value = value; */
+        }
+    </script>
      
           
       {% include "footer.html"  %}

@@ -1,17 +1,25 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 import os
+from connectionBD import create
+#from teste import cashFlow
+from executeValuation import initialValues
 
-import executeValuation
+
+import exportFile 
 
 import readIndicators
 
-""" executeValuation(24 , 0.03, 0.065, 1.2, 0.1) """
-
 indicators = readIndicators.Indicators()
-graphicDatas = readIndicators.readData("IBOV.SA")
-labelsData = graphicDatas.datas 
-valuesData= graphicDatas.dados
+
+def initialState(ticker):
+    return readIndicators.readData.teste(ticker)
+
+def funcValuation():
+    return initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+
+""" def valuesExterior():
+    return stocksEx(18, 0.1, 1.2, 0.1) """
 
 app = Flask(__name__)
 
@@ -24,22 +32,32 @@ def index():
     products = ['Baguete', 'Ciabata', 'Pretzel']
     return render_template('index.html' , products=products, dolar = indicators)
 
+
 @app.route('/about' , methods = ['GET' , 'POST'])
 def about():        
     return render_template('about.html',dolar = indicators)
 
-@app.route('/valuation')
+
+@app.route('/valuation' , methods = ['post' , 'get'])
 def valuation():
-    return render_template('valuation.html',dolar = indicators)
+    requestHtml = request.args
+    print(requestHtml)
+    if requestHtml:        
+        #datasToSend = cashFlow("IBM")
+        return render_template('valuation.html',dolar = indicators )
+    else:
+        return render_template('valuation.html',dolar = indicators)
+
 
 
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
-    initialValues = executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
-    flows = initialValues.flows()
-    
-    return render_template('showvaluation.html', dolar=indicators, valuation = initialValues , dados = dados)
+    if request.method == "POST":
+            print ("POST") 
+    initialValues = funcValuation()
+    flows = initialValues.flows()    
+    return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
 
 @app.route('/userRegister')
 def userRegister():
@@ -47,19 +65,41 @@ def userRegister():
 
 @app.route('/dashboard', methods = ['post' , 'get'])
 def dashboard():
-    ticker = "PETR4.SA"
-    graphicDatasGenerico = readIndicators.readData(ticker)
-    graphicDatasIBOV = readIndicators.readData("IBOV.SA")
-    return render_template('dashboard.html',graphicDatasIBOV=graphicDatasIBOV, graphicDatasGenerico=graphicDatasGenerico, ticker=ticker, dolar = indicators)
+    (labels , values , volume ) = initialState("PETR4.SA")
+    
+    return render_template('dashboard.html',  dolar = indicators,
+    labelsData=labels,valuesData = values, volume = volume )
 
-@app.route('/login')
+@app.route('/login' , methods = ['post' , 'get'])
 def login():
+    if request.method == "POST":
+        datas_DB = request.form
+        create(datas_DB['nome'] , datas_DB['email'])
     return render_template('login.html' )
 
-@app.route('/simulation')
-def simulation():
-    aux = []
-    return render_template('simulation.html', labelsData=labelsData, valuesData = valuesData ,dolar = indicators , auxs = aux)
+@app.route('/simulation' , methods=['post' , 'get'])
+def simulation():    
+    requestHtml = request.args  
+    if requestHtml:
+        (labels , values , volume) = initialState(requestHtml['ticker'])
+    else:
+       (labels , values, volume) = initialState("IBOV.SA") 
+    
+    
+    return render_template('simulation.html', labelsData=labels, valuesData = values ,dolar = indicators )
+
+@app.route('/exportFiles' , methods = ['post' , 'get'])
+def exportFiles():
+    dados  = request.form
+    
+    if (dados['method'] == "json"):
+        exportFile.jsonCreate(dados)
+    elif (dados['method'] == "csv"):
+       exportFile.csvCreate(dados['stockPrice'] , dados['enterpriseValue'])     
+    else:
+        print("Sem dados")
+      
+    return render_template('exportFiles.html', dolar=indicators)
 
 
 app.run(debug=True)

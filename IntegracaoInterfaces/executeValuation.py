@@ -1,4 +1,7 @@
+import  readIndicators as ex
+
 class initialValues:
+    
     ebit = [490.93, 338.93, 580.95, 887.69, 1081.55]
     ebitda = [605.26 , 464.73, 714.56, 1030.75, 1245.24]
     ncl = [0 , -372.1, -259.4, 268.2, 380.4]
@@ -30,7 +33,10 @@ class initialValues:
         fDesc =[round(self.flcFuturo[n] / pow(1 + self.costCapital , n + 1)  ,3) for n in  range(len(self.flcFuturo))] 
         fDesc[len(fDesc) - 1] = round(self.flcFuturo[len(self.flcFuturo) - 1] + fclTerminal / pow(1 + self.costCapital , n + 1)  ,3)
         enterpriseValue = sum(fDesc)
-        qualityValue = enterpriseValue + self.cash
-        stockPrice = round(qualityValue / self.quantityStock * pow(10 , 6) , 3)
-        return ({'fclPerpet' : fclPerpet}, {'fclTerminal':fclTerminal})
+        equityValue = enterpriseValue + self.cash
+        stockPrice = round(equityValue / self.quantityStock * pow(10 , 6) , 3)
+        return {'fclPerpet' : fclPerpet ,'fclTerminal':fclTerminal, 'flcFuture':self.flcFuturo,
+        'fDesc' : fDesc, 'enterpriseValue':enterpriseValue, 'equityValue' : equityValue,
+        'stockPrice':stockPrice}
+
 

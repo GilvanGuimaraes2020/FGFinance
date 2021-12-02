@@ -251,7 +251,12 @@
             <hr>
             <h6 class="center">CDI {{'%0.2f'|format(dolar.cdi | float)}}%</h6>
         </div>
-<<<<<<< HEAD
+        <div class="deep-purple lighten-1 criptomoedas">
+            <h5 class="center">Criptomoeda</h5>
+            <hr>
+            <h6 class="center">Bitcoin R$ {{'%0.2f'|format(dolar.bitcoin['buy'] | float)}}</h6>
+            <br>
+        </div>
     </div>
     <div class="row">
         <div class="col s6">
@@ -263,14 +268,9 @@
             <canvas id="chartTwo" ></canvas>
         </div>
         
-=======
-        <div class="deep-purple lighten-1 criptomoedas">
-            <h5 class="center">Criptomoeda</h5>
-            <hr>
-            <h6 class="center">Bitcoin R$ {{'%0.2f'|format(dolar.bitcoin['buy'] | float)}}</h6>
-            <br>
-        </div>
->>>>>>> b9078158df228ccda67f331a12312908643ac6e7
+
+        
+
     </div>
 
 	{% include 'footer.html' %}

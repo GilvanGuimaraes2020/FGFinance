@@ -22,8 +22,10 @@ for row in reader:
 f.close()
  """
 
-url = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=DNTIMB6HGSZAYR01"
-y = requests.get(url)
-datas3 = y.json()['annualReports']
+url3 = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=DNTIMB6HGSZAYR01"
+x = requests.get(url3 )
+datas = x.json()
+datas3 = datas['annualReports']
+
 for data in datas3:
-    print(type(data['ebit'])) 
+   print(data)

@@ -45,3 +45,17 @@ def delete(idUsuario):
     except Exception as erro:
         print (erro)
 
+def update(idUsuario , nmUsuario, email):
+    try:
+        con = connection()
+        cur = con.cursor()
+        sql = """UPDATE FROM tb_usuarios WHERE (id_usuario) = (%s);"""
+        
+        cur.execute(cur.mogrify(sql , (idUsuario)))
+        con.commit()
+        print ("Dados Deletado com sucesso")
+        
+        con.close()
+    except Exception as erro:
+        print (erro)
+

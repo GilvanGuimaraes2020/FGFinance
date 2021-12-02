@@ -14,6 +14,7 @@
   <canvas id="myChart" ></canvas>
       
   <script>
+
     var label = {{labelsData | safe}};
     var dados = [
       {
@@ -49,8 +50,9 @@
      
       intersect: false
       },
-        });
+    });
     
+
         function searchTicker(value){
         var ul = document.getElementById("lista")[0]
           var elem  = document.createElement('li');
@@ -63,6 +65,7 @@
         /*  var x = document.getElementById('showTickers');
           x.value = value; */
         }
+
   </script>
 
   {% include "footer.html" %}

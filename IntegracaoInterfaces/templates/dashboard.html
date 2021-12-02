@@ -235,7 +235,7 @@
                             {% if dolar.nikkei['variation'] < 0 %}
                                 <span><i class="material-icons left red-text">arrow_drop_down</i>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
                             {% else %}
-                                <span><i class="material-icons left light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
+                                <span><i class="material-icons left  light-green-text accent-3">arrow_drop_up</i>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
                             {% endif %}
                         {% else %}
                             <span>{{'%0.4f'|format(dolar.nikkei['variation'] | float)}}</span>
@@ -245,10 +245,13 @@
             </table>
         </div>
         <div class="pink lighten-1 taxa_juros">
-            <h5 class="center">Taxa Básica de Juros</h5>
+            <h5 class="center">Taxas de Juros</h5>
             <hr>
             <h6 class="center">Taxa Selic {{'%0.2f'|format(dolar.selic | float)}}%</h6>
+            <hr>
+            <h6 class="center">CDI {{'%0.2f'|format(dolar.cdi | float)}}%</h6>
         </div>
+<<<<<<< HEAD
     </div>
     <div class="row">
         <div class="col s6">
@@ -260,6 +263,14 @@
             <canvas id="chartTwo" ></canvas>
         </div>
         
+=======
+        <div class="deep-purple lighten-1 criptomoedas">
+            <h5 class="center">Criptomoeda</h5>
+            <hr>
+            <h6 class="center">Bitcoin R$ {{'%0.2f'|format(dolar.bitcoin['buy'] | float)}}</h6>
+            <br>
+        </div>
+>>>>>>> b9078158df228ccda67f331a12312908643ac6e7
     </div>
 
 	{% include 'footer.html' %}

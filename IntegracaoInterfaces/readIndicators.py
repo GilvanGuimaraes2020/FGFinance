@@ -60,6 +60,7 @@ class readData:
         data_filter = { k: v for (k ,v) in data.items() if dataFiltro in k}
         
         for (key , value) in data_filter.items():
+
             datas.insert(0 , key)
             dados.insert(0 , value['4. close'])
             volume.insert(0 , value['5. volume'] )

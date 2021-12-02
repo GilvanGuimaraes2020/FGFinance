@@ -1,3 +1,5 @@
+import  readIndicators as ex
+
 class initialValues:
     
     ebit = [490.93, 338.93, 580.95, 887.69, 1081.55]
@@ -36,4 +38,5 @@ class initialValues:
         return {'fclPerpet' : fclPerpet ,'fclTerminal':fclTerminal, 'flcFuture':self.flcFuturo,
         'fDesc' : fDesc, 'enterpriseValue':enterpriseValue, 'equityValue' : equityValue,
         'stockPrice':stockPrice}
+
 

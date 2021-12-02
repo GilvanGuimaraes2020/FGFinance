@@ -67,8 +67,8 @@ class readData:
 
 class exteriorTicker:
 
-    def queryTicker(ticker):
-        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo"
+    def queryTicker():
+        CSV_URL = "https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=DNTIMB6HGSZAYR01"
         with requests.Session() as s:
             download = s.get(CSV_URL)
             decoded_content = download.content.decode('utf-8')
@@ -76,3 +76,19 @@ class exteriorTicker:
             my_list = list(cr)
             for row in my_list:
                 print(row)    
+
+
+
+    #fiscalDateEnding data fiscal todas as apis
+    #Açoes em circulaçao: "SharesOutstanding"(overview)
+    #https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+    #
+    #ebit , ebitda = "ebit", "ebitda" (income-statement)
+    #
+    #passivoFE = 
+    #workingCapital= currentNetReceivables - currentAccountsPayable(balane-sheet)
+    #https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo
+    #cashAndEquivalent.append(data['changeInCashAndCashEquivalents'])
+    #caixa: cashAndCashEquivalentsAtCarryingValue + propertyPlantEquipment (balance-sheet)
+    # - dividendPayout (cash-flow)
+    

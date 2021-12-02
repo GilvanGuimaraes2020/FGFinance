@@ -1,13 +1,14 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 import os
+from connectionBD import create
+#from teste import cashFlow
+from executeValuation import initialValues
+
+
 import exportFile 
 
-import executeValuation
-
 import readIndicators
-
-""" executeValuation(24 , 0.03, 0.065, 1.2, 0.1) """
 
 indicators = readIndicators.Indicators()
 
@@ -15,10 +16,10 @@ def initialState(ticker):
     return readIndicators.readData.teste(ticker)
 
 def funcValuation():
-    return executeValuation.initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    return initialValues(24 , 0.03, 0.065, 1.2, 0.1)
 
-def queryTicker(ticker):
-    return readIndicators.exteriorTicker(ticker)
+""" def valuesExterior():
+    return stocksEx(18, 0.1, 1.2, 0.1) """
 
 app = Flask(__name__)
 
@@ -31,17 +32,19 @@ def index():
     products = ['Baguete', 'Ciabata', 'Pretzel']
     return render_template('index.html' , products=products, dolar = indicators)
 
+
 @app.route('/about' , methods = ['GET' , 'POST'])
 def about():        
     return render_template('about.html',dolar = indicators)
+
 
 @app.route('/valuation' , methods = ['post' , 'get'])
 def valuation():
     requestHtml = request.args
     print(requestHtml)
-    if requestHtml:
-
-        return render_template('valuation.html',dolar = indicators)
+    if requestHtml:        
+        #datasToSend = cashFlow("IBM")
+        return render_template('valuation.html',dolar = indicators )
     else:
         return render_template('valuation.html',dolar = indicators)
 
@@ -50,6 +53,8 @@ def valuation():
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
+    if request.method == "POST":
+            print ("POST") 
     initialValues = funcValuation()
     flows = initialValues.flows()    
     return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
@@ -65,8 +70,11 @@ def dashboard():
     return render_template('dashboard.html',  dolar = indicators,
     labelsData=labels,valuesData = values, volume = volume )
 
-@app.route('/login')
+@app.route('/login' , methods = ['post' , 'get'])
 def login():
+    if request.method == "POST":
+        datas_DB = request.form
+        create(datas_DB['nome'] , datas_DB['email'])
     return render_template('login.html' )
 
 @app.route('/simulation' , methods=['post' , 'get'])

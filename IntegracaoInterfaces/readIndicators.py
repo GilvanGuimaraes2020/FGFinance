@@ -60,10 +60,7 @@ class readData:
         data_filter = { k: v for (k ,v) in data.items() if dataFiltro in k}
         
         for (key , value) in data_filter.items():
-<<<<<<< HEAD
-            self.datas.insert(0 , key)
-            self.dados.insert(0 , value['4. close'])
-=======
+
             datas.insert(0 , key)
             dados.insert(0 , value['4. close'])
             volume.insert(0 , value['5. volume'] )
@@ -96,4 +93,3 @@ class exteriorTicker:
     #caixa: cashAndCashEquivalentsAtCarryingValue + propertyPlantEquipment (balance-sheet)
     # - dividendPayout (cash-flow)
     
->>>>>>> 2de4ab408f03f194926fae51ce9ab8c1517847dc

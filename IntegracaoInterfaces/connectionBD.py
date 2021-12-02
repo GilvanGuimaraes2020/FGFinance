@@ -30,3 +30,18 @@ def create(nmUsuario , email):
         con.close()
     except Exception as erro:
         print (erro)
+
+def delete(idUsuario):
+    try:
+        con = connection()
+        cur = con.cursor()
+        sql = """DELETE FROM tb_usuarios WHERE (id_usuario) = (%s);"""
+        
+        cur.execute(cur.mogrify(sql , (idUsuario)))
+        con.commit()
+        print ("Dados Deletado com sucesso")
+        
+        con.close()
+    except Exception as erro:
+        print (erro)
+

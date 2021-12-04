@@ -2,15 +2,16 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 
+
 import connectionDataBase.connectionBD as BD
 
 
-#from teste import cashFlow
+from valuation.exteriorStocksValues import cashFlow, debt, balance, overview
 from valuation.executeValuation import initialValues
 
 
 import getFiles.exportFile  as exportFile
-
+import re
 import indicators.readIndicators as readIndicators
 
 indicators = readIndicators.Indicators()
@@ -19,12 +20,33 @@ def initialState(ticker):
     return readIndicators.readData.teste(ticker)
 
 def funcValuation(dados):
-    for (k , v) in dados.items():
-        print(v)
-    return initialValues(24 , 0.03, 0.065, 1.2, 0.1)
+    ebit = [float(v) for (k ,v) in dados.items() if re.search("\\bebit.\\b", k)]
+    ebitda = [float(v) for (k ,v) in  dados.items() if "ebitda" in k ]
+    ncg = [float(v) for (k ,v) in dados.items() if "cg" in k]
+    stocks = int(dados['stocks'])
+    IR = int(dados['IR'])
+    growth = int(dados['growth'])
+    reinvest = float(dados['reinvest'])
+    cash = float(dados['cash'])
+    sendDados = {'ebit':ebit, 'ebitda' : ebitda, 
+    'ncg' :ncg, 'stocks' : stocks, 'IR' : IR,
+    'growth' :growth, 'reinvest' : reinvest,
+    'cash' : cash}
+    return initialValues(sendDados)
 
-""" def valuesExterior():
-    return stocksEx(18, 0.1, 1.2, 0.1) """
+def cashValues(dados):    
+    return cashFlow(dados)
+
+def debtValue(dados , cashvalue):
+    cashout = debt(dados)
+    cashin = [cashvalue[i] - cashout[i] for i in range(5)]
+    return cashin
+
+def balanceValue(dados):
+    return balance(dados)
+
+def overValue(dados):
+    return overview(dados)
 
 app = Flask(__name__)
 
@@ -48,21 +70,33 @@ def valuation():
     requestHtml = request.args
     print(requestHtml)
     if requestHtml:        
-        #datasToSend = cashFlow("IBM")
-        return render_template('valuation.html',dolar = indicators )
+        cashflow = cashValues("IBM") #ebit e ebitda
+        print(cashflow)
+        #caixa equivalente e o capital de giro
+        balanceVal = balanceValue("IBM")
+        print(balanceVal)
+        #retorna o caixa da empresa
+        cash = debtValue("IBM" , balanceVal['cash'])
+        print(debt)
+        #quantidade de açoes       
+        over = overValue("IBM")
+        print(over) 
+        return render_template('valuation.html',dolar = indicators,
+        over = over , ebit = cashflow['ebit'], 
+        ebitda = cashflow['ebitda'], cash = cash )
     else:
         return render_template('valuation.html',dolar = indicators)
-
 
 
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
     if request.method == "POST":
-        print (dados['ebit1']) 
-    initialValues = funcValuation(dados)
-    flows = initialValues.flows()    
+        initialValues = funcValuation(dados)
+        flows = initialValues.flows()   
+    
     return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
+
 
 @app.route('/userRegister')
 def userRegister():

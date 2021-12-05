@@ -1,24 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
-      <title>Finanças</title>
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
+        <title>Finanças</title>
+        <style>
+            .tela_index {
+                display: flex;
+                position: relative;
+                width: 992px;
+                height: 680px;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+            }
+            .fundo_transparente_inicial {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background-color: white;
+                opacity: 0.4;
+                border-radius: 1rem;
+                box-shadow: 10px 10px 10px black;
+                margin: 5rem;
+            }
+            .fundo_transparente_login {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background-color: white;
+                opacity: 0.4;
+                border-radius: 1rem;
+                box-shadow: 10px 10px 10px black;
+                margin: 2rem;
+            }
+            #options {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 5rem;
+            }
+            #cadastro {
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 1rem;
+                padding: 1rem;
+            }
+            #login {
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 1rem;
+                padding: 1rem;
+            }
+            img {
+                opacity: 0.9;
+            }
+            #section-login {
+                display: flex;
+                flex-direction: row;
+                position: relative;
+                width: 992px;
+                height: 500px;
+                border: 1px solid white;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                flex-wrap: wrap;
+                margin: 6rem;
+            }
+            form label{
+                color: white;
+            }
+            form input{
+                color: white;
+            }
+        </style>
+    </head>
 
-  <body class="blue-grey darken-3 white-text">
-      <nav>
-          <div class="nav-wrapper blue-grey darken-4">
-              <div class="row">
-                  <div class="col s1">
-                      <a href="/" class="brand-logo yellow-text left" style="font-family: Tangerine , serif; font-size: 45px;">FG Finance</a>
-                  </div>
-              </div>
-          </div>
-      </nav>
+    <body class="blue-grey darken-3">
+        <nav>
+            <div class="nav-wrapper blue-grey darken-4">
+                <div class="row">
+                    <div class="col s1">
+                        <a href="/" class="brand-logo yellow-text left" style="font-family: Tangerine , serif; font-size: 45px;">FG Finance</a>
+                    </div>
+                </div>
+            </div>
+        </nav>

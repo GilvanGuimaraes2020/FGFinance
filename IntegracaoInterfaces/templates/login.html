@@ -1,20 +1,29 @@
 	{%  include 'headInitial.html' %}
 
-	<section class= "container grey-text">
-		<h4 class="center">Login Usuario</h4>
+	<h4 class="center white-text">Login</h4>
 
-		<form action="/dashboard" method="post">
-			<input id="name_pass" type="text" name="nome" value="" class="validate">
-			<label for="name_pass"> Nome</label>
-			<input id="password" type="password" name="email" value="" class="validate">
-			<label for="password"> email </label>
-			<div class="center" style="margin: 10px 5px 10px 5px;">
-				<input type="submit" name="enviar" value="Enviar" class="waves-effect red btn-large">
-			</div>
-			<div class="center" style="margin-bottom: 20px;"> 
-				<a href="userRegister">Esqueci minha senha</a>
-			</div>
-		</form>
+	<section class="container white-text">
+		<div id="section-login">
+			<div class="fundo_transparente_login"></div>
+			<form action="/dashboard" method="post">
+				<div class="input-field col s12">
+					<input id="name_pass" type="text" name="nome" value="" class="validate">
+					<label class="active" for="name_pass">Usuário</label>
+				</div>
+				<div class="input-field col s12">
+					<input id="password" type="password" name="senha" value="" class="validate">
+					<label class="active" for="password">Senha</label>
+				</div>
+				
+				
+				<div class="center">
+					<input type="submit" name="enviar" value="Enviar" class="waves-effect pink darken-2 btn-large">
+				</div>
+				<div class="center" style="margin-bottom: 20px;"> 
+					<a href="userRegister">Esqueci minha senha</a>
+				</div>
+			</form>
+		</div>
 	</section>
 
 	{% include 'footerInitial.html' %}

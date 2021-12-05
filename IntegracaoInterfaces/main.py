@@ -109,16 +109,16 @@ def login():
         BD.saveDatas(user_to_bd , "usuario")
     return render_template('login.html' )
 
-@app.route('/simulation' , methods=['post' , 'get'])
-def simulation():    
+@app.route('/listDatas' , methods=['post' , 'get'])
+def listDatas():    
     requestHtml = request.args  
     if requestHtml:
         (labels , values , volume) = initialState(requestHtml['ticker'])
     else:
        (labels , values, volume) = initialState("IBOV.SA") 
+
     
-    
-    return render_template('simulation.html', labelsData=labels, valuesData = values ,dolar = indicators )
+    return render_template('listDatasBD.html', labelsData=labels, valuesData = values ,dolar = indicators )
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])
 def exportFiles():

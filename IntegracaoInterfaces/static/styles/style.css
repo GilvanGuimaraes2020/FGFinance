@@ -1,6 +1,7 @@
 
 .menu ul li:hover {
     background-color: black;
+    color: black;
 }
 .indicators{
     display: flex;
@@ -45,7 +46,8 @@
     padding: 30px;
 
 }
-.active {
+
+.collection-header, .collection-item {
     color: black;
 }
-        
+

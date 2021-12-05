@@ -1,24 +1,133 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
-      <title>Finanças</title>
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
+        <title>Finanças</title>
+        <style>
+            .tela_index {
+                display: flex;
+                position: relative;
+                /* flex-direction: column; */
+                width: 992px;
+                height: 680px;
+                /* border: 10px solid pink; */
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                /* z-index: -2; */
+            }
+            #fundo_transparente {
+                position: absolute;
+                width: 350px;
+                height: 400px;
+                background-color: white;
+                opacity: 0.4;
+                border-radius: 1rem;
+                box-shadow: gray;
+                /* border: 1px solid red; */
+                margin: 5rem;
+                /* z-index: -1; */
+            }
+            /* #options {
+                position: absolute;
+                display:block;
+                width: 350px;
+                height: 350px;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+                margin: auto;
+            } */
+            #options {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                display: flex;
+                flex-direction: column;
+                /* border: 1px solid yellowgreen; */
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 5rem;
+                /* z-index: 2; */
+            }
+            /* #cadastro {
+                position: absolute;
+                display:contents;
+                float: top; */
+                /* justify-content: center;
+                align-content: center; */
+                /* left: auto;
+                right: auto;
+                top: auto;
+                bottom: auto;
+                margin:auto; */
+            /* } */
+            /* #login { */
+                /* position: absolute;
+                display:contents;
+                float: bottom; */
+                /* justify-content: center;
+                align-content: center; */
+                /* left: auto;
+                right: auto;
+                top: auto;
+                bottom: auto;
+                margin:auto; */
+            /* } */
+            #cadastro {
+                width: 90%;
+                /* height: 190px; */
+                /* border: 1px solid azure; */
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 1rem;
+                padding: 1rem;
+                /* z-index: 2; */
+            }
+            /* #cadastro a{
+                flex-direction: row;
+                width: 50%;
+                align-content: center;
+                justify-content: center;
+            } */
+            #login {
+                width: 90%;
+                /* height: 190px; */
+                /* border: 1px solid azure; */
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+                margin: 1rem;
+                padding: 1rem;
+                /* z-index: 2; */
+            }
+            img {
+                opacity: 0.9;
+            }
+        </style>
+    </head>
 
-  <body class="blue-grey darken-3 white-text">
-      <nav>
-          <div class="nav-wrapper blue-grey darken-4">
-              <div class="row">
-                  <div class="col s1">
-                      <a href="/" class="brand-logo yellow-text left" style="font-family: Tangerine , serif; font-size: 45px;">FG Finance</a>
-                  </div>
-              </div>
-          </div>
-      </nav>
+    <body class="blue-grey darken-3">
+        <nav>
+            <div class="nav-wrapper blue-grey darken-4">
+                <div class="row">
+                    <div class="col s1">
+                        <a href="/" class="brand-logo yellow-text left" style="font-family: Tangerine , serif; font-size: 45px;">FG Finance</a>
+                    </div>
+                </div>
+            </div>
+        </nav>

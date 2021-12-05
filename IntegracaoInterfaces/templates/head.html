@@ -8,57 +8,18 @@
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'styles/style.css') }}">
         <link href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/1.0.0/Chart.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
-        <script src="https://www.gstatic.com/charts/loader.js"></script>
-
         <script src="//www.chartjs.org/assets/Chart.min.js"></script>
 
-        <title>Finanças</title>
-        <style>
-            .menu ul li:hover {
-                background-color: black;
-            }
-            .indicators{
-                display: flex;
-                background-color: black;
-                overflow: auto;
-            }
-            .ind{
-                margin-left: 25px;
-                margin-right: 80px;
-            }
-            .cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
-                margin: 10px;
-                padding: 5px;
-            }
-            .taxa_juros {
-                height: min-content;
-            }
-            .criptomoedas {
-                height: min-content;
-            }
-            .dashboard {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-            .pesquisa {
-                width: 350px;
-                height: 60px;
-                border-radius: 30px;
-            }
-            .cards_entrada {
-                display: grid;
-            }
-            #myChart {
-                background-color: white;
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-            }
-        </style>
+        <title>Finanças</title>
+        
     </head>
 
     <body class="blue-grey darken-3 white-text">

@@ -14,79 +14,45 @@
             .tela_index {
                 display: flex;
                 position: relative;
-                /* flex-direction: column; */
                 width: 992px;
                 height: 680px;
-                /* border: 10px solid pink; */
                 flex-wrap: wrap;
                 align-content: center;
                 justify-content: center;
-                /* z-index: -2; */
             }
-            #fundo_transparente {
+            .fundo_transparente_inicial {
                 position: absolute;
-                width: 350px;
+                width: 400px;
                 height: 400px;
                 background-color: white;
                 opacity: 0.4;
                 border-radius: 1rem;
                 box-shadow: 10px 10px 10px black;
-                /* border: 1px solid red; */
                 margin: 5rem;
-                /* z-index: -1; */
             }
-            /* #options {
+            .fundo_transparente_login {
                 position: absolute;
-                display:block;
-                width: 350px;
-                height: 350px;
-                left: 0px;
-                right: 0px;
-                top: 0px;
-                bottom: 0px;
-                margin: auto;
-            } */
+                width: 400px;
+                height: 400px;
+                background-color: white;
+                opacity: 0.4;
+                border-radius: 1rem;
+                box-shadow: 10px 10px 10px black;
+                margin: 2rem;
+            }
             #options {
                 position: absolute;
                 width: 400px;
                 height: 400px;
                 display: flex;
                 flex-direction: column;
-                /* border: 1px solid yellowgreen; */
                 flex-wrap: wrap;
                 align-content: center;
                 justify-content: center;
                 margin: 5rem;
-                /* z-index: 2; */
             }
-            /* #cadastro {
-                position: absolute;
-                display:contents;
-                float: top; */
-                /* justify-content: center;
-                align-content: center; */
-                /* left: auto;
-                right: auto;
-                top: auto;
-                bottom: auto;
-                margin:auto; */
-            /* } */
-            /* #login { */
-                /* position: absolute;
-                display:contents;
-                float: bottom; */
-                /* justify-content: center;
-                align-content: center; */
-                /* left: auto;
-                right: auto;
-                top: auto;
-                bottom: auto;
-                margin:auto; */
-            /* } */
             #cadastro {
                 width: 90%;
-                /* height: 190px; */
-                /* border: 1px solid azure; */
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
@@ -94,18 +60,9 @@
                 justify-content: center;
                 margin: 1rem;
                 padding: 1rem;
-                /* z-index: 2; */
             }
-            /* #cadastro a{
-                flex-direction: row;
-                width: 50%;
-                align-content: center;
-                justify-content: center;
-            } */
             #login {
                 width: 90%;
-                /* height: 190px; */
-                /* border: 1px solid azure; */
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
@@ -113,10 +70,33 @@
                 justify-content: center;
                 margin: 1rem;
                 padding: 1rem;
-                /* z-index: 2; */
             }
             img {
                 opacity: 0.9;
+            }
+            #section-login {
+                display: flex;
+                flex-direction: row;
+                position: relative;
+                width: 992px;
+                height: 500px;
+                border: 1px solid white;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: center;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                flex-wrap: wrap;
+                margin: 6rem;
+            }
+            form label{
+                color: white;
+            }
+            form input{
+                color: white;
             }
         </style>
     </head>

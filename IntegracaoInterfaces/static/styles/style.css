@@ -1,0 +1,48 @@
+
+.menu ul li:hover {
+    background-color: black;
+}
+.indicators{
+    display: flex;
+    background-color: black;
+    overflow: auto;
+}
+.ind{
+    margin-left: 25px;
+    margin-right: 80px;
+}
+.cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
+    margin: 10px;
+    padding: 5px;
+}
+.taxa_juros {
+    height: min-content;
+}
+.criptomoedas {
+    height: min-content;
+}
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.pesquisa {
+    width: 350px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+#myChart {
+    background-color: white;
+}
+
+.cards_entrada {
+    display: grid;
+}
+.quadro_cadastro, .quadro_login {
+    width: 100px;
+    height: 100px;
+    padding: 30px;
+
+}
+        

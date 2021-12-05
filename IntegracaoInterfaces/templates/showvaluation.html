@@ -6,15 +6,15 @@
     <h5>*******************************</h5>
     <br><br>
     <h5>Retorna listas:ir, depreciaçao, nopat, capex, fluxo operacional, fluxo liquido </h5>
-    <h4>{{initialValues.ir[0]}}</h4>
+    <h4>{{ivalues.ebitda}}</h4>
     <br><br>
     <h5>*******************************</h5>
     <h5>Retorna: fluxo futuro, flx perpetuo, flx desc, valor empresa, equityvalue, preco acao</h5>
-    <h4>{{flows['stockPrice']}}</h4>
+    <h4>{{ivalues.quantityStock}}</h4>
     <form action="/exportFiles" method="post">
-      <input type="hidden" name="stockPrice" value="{{flows['stockPrice']}}">
-      <input type="hidden" name="enterpriseValue" value="{{flows['enterpriseValue']}}">
-      <input type="hidden" name="fclTerminal" value="{{flows['fclTerminal']}}">
+      <input type="hidden" name="stockPrice" value="{{ivalues.cash}}">
+      <input type="hidden" name="enterpriseValue" value="{{ivalues.cash}}">
+      <input type="hidden" name="fclTerminal" value="{{ivalues.cash}}">
      <div class="row">
         <div class="col s6">
           <button type="submit" name="method" value="json"> Gerar Json </button>

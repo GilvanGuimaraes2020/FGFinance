@@ -1,16 +1,7 @@
 import requests
 
-""" class ValuesExterior:
+class ValuesExterior:
     
-     quantityStock = overview("IBM")  
-    fluxo = ex.CashFlow.cashFlow("'IBM")   
-    ebit = fluxo['ebit']
-    ebitda = fluxo['ebitda']
-    balance = ex.balance("IBM")
-    working = balance['working']
-    cashEquivalent = balance['cash']
-    debt = ex.debt("IBM") 
-
     def __init__(self,dados) :
         self.growthPerpet = 0.03
         self.growth = dados['growth'] / 100
@@ -19,8 +10,8 @@ import requests
         irRate = dados['IR']
         self.ebit = dados['ebit']
         self.ebitda = dados['ebitda']
-        ncl = dados['ncg']
-        ncg = [(ncl[i] - ncl[i - 1]) for i in range(1 , 5) ]
+        self.ncl = dados['ncg']
+        ncg = [(self.ncl[i] - self.ncl[i - 1]) for i in range(1 , 5) ]
         ncg.insert(0 , 0)
         self.quantityStock = dados['stocks']
         self.cash =  dados['cash']
@@ -46,65 +37,70 @@ import requests
         fDesc[len(fDesc) - 1] = round(flcFuturo[len(flcFuturo) - 1] + fclTerminal / pow(1 + self.costCapital , n + 1)  ,3)
         enterpriseValue = sum(fDesc)
         equityValue = enterpriseValue + self.cash
-        stockPrice = round(equityValue * pow(10 , 6)/ self.quantityStock  , 3)
-        
-        return {'fclPerpet' : fclPerpet ,'fclTerminal':fclTerminal, 'flcFuture':flcFuturo,
-        'fDesc' : fDesc, 'enterpriseValue':enterpriseValue, 'equityValue' : equityValue,
-        'stockPrice':stockPrice}
- """
-
-
-def cashFlow(ticker):
-    ebit = []
-    ebitda = []
-    url3 = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
-    x = requests.get(url3 )
-    datas = x.json()
-    datas3 = datas['annualReports']
-    
-    for data in datas3:
-        ebit.append(float(data['ebit'])) 
-        ebitda.append(float(data['ebitda'])) 
-    
-    return {'ebit': ebit,
-        'ebitda' : ebitda}  
-
-
-def debt (ticker):
-    debtCash = []        
-    url = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
-    a = requests.get(url)
-    datas = a.json()['annualReports']
-    for data in datas:                
-        debtCash.append(float(data['cashflowFromFinancing']) + int(data['dividendPayout']))
-    a.close()
-    del datas
-    return debtCash 
+        stockPrice = round(equityValue / self.quantityStock  , 3)
+        self.fclPerpet = fclPerpet
+        self.fclTerminal = fclTerminal
+        self.flcFuturo = flcFuturo
+        self.fDesc = fDesc
+        self.enterprise = enterpriseValue
+        self.equity = equityValue
+        self.stockPrice = stockPrice
         
 
-def balance (ticker):
-    workingCapital = []
-    cashAndEquivalent = []
-    url2 = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
-    x = requests.get(url2)
-    datas2 = x.json()['annualReports']
-    for data in datas2:
-        workingCapital.append(float(data['currentNetReceivables']) - int(data['currentAccountsPayable'])) 
-        cashAndEquivalent.append(float(data['cashAndShortTermInvestments']) + int(data['propertyPlantEquipment']))               
-    x.close()
-    del datas2
-    return {
-        'working' : workingCapital,
-        'cash' : cashAndEquivalent
-    }
+class datasCompaniesExt:  
+
+    def __init__(self , ticker):
+        self.ticker = ticker
+
+    def cashFlow(self):
+        ebit = []
+        ebitda = []
+        url3 = f"https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={self.ticker}&apikey=DNTIMB6HGSZAYR01"
+        x = requests.get(url3 )
+        datas = x.json()
+        datas3 = datas['annualReports']
+        
+        for data in datas3:
+            ebit.append(float(data['ebit'])) 
+            ebitda.append(float(data['ebitda'])) 
+        
+        self.ebit = ebit
+        self.ebitda = ebitda 
 
 
-    
+    def debt (self):
+        debtCash = []        
+        url = f"https://www.alphavantage.co/query?function=CASH_FLOW&symbol={self.ticker}&apikey=DNTIMB6HGSZAYR01"
+        a = requests.get(url)
+        datas = a.json()['annualReports']
+        for data in datas:                
+            debtCash.append(float(data['cashflowFromFinancing']) + int(data['dividendPayout']))
+        a.close()
+        del datas
+        self.debtCash  = debtCash
+            
 
-def overview(ticker):        
-    url = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={ticker}&apikey=DNTIMB6HGSZAYR01"
-    z = requests.get(url)
-    dados = z.json()['SharesOutstanding']
-    quantityStock = int(dados)
-    
-    return quantityStock    
+    def balance (self):
+        workingCapital = []
+        cashAndEquivalent = []
+        url2 = f"https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol={self.ticker}&apikey=DNTIMB6HGSZAYR01"
+        x = requests.get(url2)
+        datas2 = x.json()['annualReports']
+        for data in datas2:
+            workingCapital.append(float(data['currentNetReceivables']) - int(data['currentAccountsPayable'])) 
+            cashAndEquivalent.append(float(data['cashAndShortTermInvestments']) + int(data['propertyPlantEquipment']))               
+        x.close()
+        del datas2
+        self.workingCapital = workingCapital
+        self.cashAndEquivalent = cashAndEquivalent
+
+
+        
+
+    def overview(self):        
+        url = f"https://www.alphavantage.co/query?function=OVERVIEW&symbol={self.ticker}&apikey=DNTIMB6HGSZAYR01"
+        z = requests.get(url)
+        dados = z.json()['SharesOutstanding']
+        quantityStock = int(dados)
+        
+        self.quantityStock = quantityStock 

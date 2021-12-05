@@ -14,14 +14,15 @@
 
     </div>
   </div>
-  {%if over != '' %}
-    <input type="text" value="{{over}}" id="verifica">
-  {% else %}
-    <input type="text" value="" id="verifica">
-  {% endif %}
   
   <form action="/showvaluation" onsubmit="return check_form()" class="white" method = "post" form = "formEvento">
     
+    {%if over != '' %}
+      <input type="hidden" name="setExterior" value="{{ticker}}" id="setExterior">
+    {% else %}
+      <input type="hidden" value="" name="setExterior" id="setExterior">
+    {% endif %}
+  
     <div class="row">
     
         <div class="row">
@@ -128,7 +129,7 @@
 
     <script >
       window.onload = function(){
-        var verify = document.getElementById("verifica");
+        var verify = document.getElementById("setExterior");
         var actualYear = new Date();
         for (var i = 5; i > 0 ; i-- ){
           var head = document.getElementById("head" + i);
@@ -170,12 +171,22 @@
         var stock = {{over}};
         var ebit = {{ebit | safe}};
         var ebitda = {{ebitda | safe}};
-        var cash = {{cash | safe }};
+        var working = {{working | safe}}
+        var cash = {{cash}};
           
         
         var overhtml = document.getElementsByName("stocks");
           overhtml[0].value = stock
-        
+        for (var i = 0; i < 5; i ++){
+          var ebithtml = document.getElementsByName("ebit" + (i + 1))
+          var ebitdahtml = document.getElementsByName("ebitda" + (i + 1))
+          var workhtml = document.getElementsByName("cg" + (i + 1))
+          ebithtml[0].value = ebit[i]
+          ebitdahtml[0].value = ebitda[i]
+          workhtml[0].value = working[i]
+        }
+        var cashhtml = document.getElementsByName("cash")
+        cashhtml[0].value = cash
 
         }
       </script>

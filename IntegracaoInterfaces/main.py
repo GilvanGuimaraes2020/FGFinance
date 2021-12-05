@@ -2,16 +2,12 @@
 from flask import Flask , render_template , request
 from flask_material import Material
 
-
 import connectionDataBase.connectionBD as BD
-
-
-from valuation.exteriorStocksValues import cashFlow, debt, balance, overview
+from valuation.exteriorStocksValues import datasCompaniesExt as dcExt , ValuesExterior as vext
 from valuation.executeValuation import initialValues
-
-
+from lists.classesBD import connBD as classBD
+from setDados.setDatasValuation import extValuation as setValues
 import getFiles.exportFile  as exportFile
-import re
 import indicators.readIndicators as readIndicators
 
 indicators = readIndicators.Indicators()
@@ -20,33 +16,17 @@ def initialState(ticker):
     return readIndicators.readData.teste(ticker)
 
 def funcValuation(dados):
-    ebit = [float(v) for (k ,v) in dados.items() if re.search("\\bebit.\\b", k)]
-    ebitda = [float(v) for (k ,v) in  dados.items() if "ebitda" in k ]
-    ncg = [float(v) for (k ,v) in dados.items() if "cg" in k]
-    stocks = int(dados['stocks'])
-    IR = int(dados['IR'])
-    growth = int(dados['growth'])
-    reinvest = float(dados['reinvest'])
-    cash = float(dados['cash'])
-    sendDados = {'ebit':ebit, 'ebitda' : ebitda, 
-    'ncg' :ncg, 'stocks' : stocks, 'IR' : IR,
-    'growth' :growth, 'reinvest' : reinvest,
-    'cash' : cash}
+    sendDados = setValues(dados)
     return initialValues(sendDados)
 
-def cashValues(dados):    
-    return cashFlow(dados)
+def extValuation(dados):
+    sendDados = setValues(dados)
+    return vext(sendDados)
 
-def debtValue(dados , cashvalue):
-    cashout = debt(dados)
-    cashin = [cashvalue[i] - cashout[i] for i in range(5)]
-    return cashin
+def resultCash(gainCash , debtCash):
+    profit = gainCash[4] - debtCash[4] 
+    return profit
 
-def balanceValue(dados):
-    return balance(dados)
-
-def overValue(dados):
-    return overview(dados)
 
 app = Flask(__name__)
 
@@ -68,22 +48,23 @@ def about():
 @app.route('/valuation' , methods = ['post' , 'get'])
 def valuation():
     requestHtml = request.args
-    print(requestHtml)
-    if requestHtml:        
-        cashflow = cashValues("IBM") #ebit e ebitda
-        print(cashflow)
-        #caixa equivalente e o capital de giro
-        balanceVal = balanceValue("IBM")
-        print(balanceVal)
+    
+    if requestHtml:   
+        ticker = requestHtml['ticker']
+        dtsExt =  dcExt(ticker)    
+        dtsExt.cashFlow() #ebit e ebitda
+        dtsExt.overview() #quantidade de açoes 
+        dtsExt.balance()#caixa equivalente e o capital de giro
+        dtsExt.debt()               
         #retorna o caixa da empresa
-        cash = debtValue("IBM" , balanceVal['cash'])
-        print(debt)
-        #quantidade de açoes       
-        over = overValue("IBM")
-        print(over) 
+        cash = resultCash(dtsExt.cashAndEquivalent , dtsExt.debtCash)
+              
+        
         return render_template('valuation.html',dolar = indicators,
-        over = over , ebit = cashflow['ebit'], 
-        ebitda = cashflow['ebitda'], cash = cash )
+        over = dtsExt.quantityStock , ebit = dtsExt.ebit, 
+        ebitda = dtsExt.ebitda, cash = cash,
+        working = dtsExt.workingCapital , 
+        ticker = ticker)        
     else:
         return render_template('valuation.html',dolar = indicators)
 
@@ -92,10 +73,21 @@ def valuation():
 def showvaluation():
     dados  = request.form
     if request.method == "POST":
-        initialValues = funcValuation(dados)
-        flows = initialValues.flows()   
-    
-    return render_template('showvaluation.html', dolar=indicators, initialValues = initialValues , dados = dados, flows = flows)
+        if dados['setExterior']:
+            ivalues = extValuation(dados)
+        else:
+          ivalues = funcValuation(dados)
+        ivalues.flows()  
+        value_to_bd = classBD(
+            ivalues.ebit, ivalues.ebitda,
+            ivalues.ncl , ivalues.quantityStock,
+            ivalues.enterprise,ivalues.equity, dados['setExterior'],
+            ivalues.stockPrice , '' ,''
+        ) 
+        BD.saveDatas(value_to_bd , "valuation")  
+        return render_template('showvaluation.html', dolar=indicators, ivalues = ivalues, dados = dados)
+    else:
+        return render_template('showvaluation.html', dolar=indicators)
 
 
 @app.route('/userRegister')
@@ -112,8 +104,9 @@ def dashboard():
 @app.route('/login' , methods = ['post' , 'get'])
 def login():
     if request.method == "POST":
-        datas_DB = request.form
-        BD.create(datas_DB['nome'] , datas_DB['email'])
+        datas_DB = request.form        
+        user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['nome'] , datas_DB['email'])
+        BD.saveDatas(user_to_bd , "usuario")
     return render_template('login.html' )
 
 @app.route('/simulation' , methods=['post' , 'get'])

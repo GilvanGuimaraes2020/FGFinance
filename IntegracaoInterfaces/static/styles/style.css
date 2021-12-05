@@ -51,3 +51,98 @@
     color: black;
 }
 
+
+
+.tela_index {
+    display: flex;
+    position: relative;
+    width: 992px;
+    height: 680px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.fundo_transparente_inicial {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    opacity: 0.4;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+    margin: 5rem;
+}
+.fundo_transparente_login {
+    position: absolute;
+    width: 50%;
+    height: 400px;
+    background-color: white;
+    opacity: 0.4;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+    margin: 2rem;
+}
+#options {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 5rem;
+}
+#cadastro {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+#login {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+#img_index {
+    opacity: 0.9;
+}
+#section-login {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 992px;
+    height: 500px;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+#form_login {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    flex-wrap: wrap;
+    margin-top: 9rem;
+}
+#form_login label{
+    color: white;
+}
+#form_login input{
+    color: white;
+}
+        
+
+/* ESTILO DAS PÁGINAS: DASHBOARD E DEMAIS PÁGINAS */
+
+

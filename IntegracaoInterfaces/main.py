@@ -117,7 +117,7 @@ def listDatas():
     else:
        (labels , values, volume) = initialState("IBOV.SA") 
 
-    
+ 
     return render_template('listDatasBD.html', labelsData=labels, valuesData = values ,dolar = indicators )
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])

@@ -117,7 +117,7 @@ def simulation():
     else:
        (labels , values, volume) = initialState("IBOV.SA") 
     
-    
+
     return render_template('simulation.html', labelsData=labels, valuesData = values ,dolar = indicators )
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])

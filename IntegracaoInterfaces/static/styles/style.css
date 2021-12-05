@@ -1,31 +1,128 @@
+/* ESTILO DAS PÁGINAS: INICIAL, LOGIN E CADASTRO DE USUÁRIOS */
+.tela_index {
+    display: flex;
+    position: relative;
+    width: 992px;
+    height: 680px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.fundo_transparente_inicial {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    opacity: 0.4;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+    margin: 5rem;
+}
+.fundo_transparente_login {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    opacity: 0.4;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+    margin: 2rem;
+}
+#options {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 5rem;
+}
+#cadastro {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+#login {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+#img_index {
+    opacity: 0.9;
+}
+#section-login {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 992px;
+    height: 500px;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+#form_login {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    flex-wrap: wrap;
+    margin: 6rem;
+}
+#form_login label{
+    color: white;
+}
+#form_login input{
+    color: white;
+}
+        
 
+/* ESTILO DAS PÁGINAS: DASHBOARD E DEMAIS PÁGINAS */
 .menu ul li:hover {
     background-color: black;
 }
+
 .indicators{
     display: flex;
     background-color: black;
     overflow: auto;
 }
+
 .ind{
     margin-left: 25px;
     margin-right: 80px;
 }
+
 .cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
     margin: 10px;
     padding: 5px;
 }
+
 .taxa_juros {
     height: min-content;
 }
+
 .criptomoedas {
     height: min-content;
 }
+
 .dashboard {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 .pesquisa {
     width: 350px;
     height: 60px;
@@ -36,13 +133,4 @@
     background-color: white;
 }
 
-.cards_entrada {
-    display: grid;
-}
-.quadro_cadastro, .quadro_login {
-    width: 100px;
-    height: 100px;
-    padding: 30px;
 
-}
-        

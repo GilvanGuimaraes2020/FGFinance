@@ -118,7 +118,7 @@ def delete(sql , idDelete):
         print ("Dados Deletado com sucesso")
         
         con.close()
-        return " "
+        
     except Exception as erro:
         print (erro)
 

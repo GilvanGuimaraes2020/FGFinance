@@ -67,8 +67,7 @@ def userRegister():
             dDB['email'] , dDB['senha'])
             return render_template('login.html')
         else:
-            metodo = "salvar"
-            
+            metodo = "salvar"            
             ids = 0
             user_to_bd = bdu(dDB['usuario'] ,dDB['email'], dDB['senha'])
             BD.saveDatas(user_to_bd ,metodo, "usuario" , ids)
@@ -114,7 +113,6 @@ def valuation():
 def showvaluation():
     if session['username']:
         dados  = request.form
-
         if request.method == "POST":
             if dados['setExterior']:
                 metodo = "salvar"
@@ -123,12 +121,10 @@ def showvaluation():
             elif dados['idValuation']:
                 metodo = "atualizar"
                 ids = [dados['idValuation'],dados['idebit'],dados['idebitda'], dados['idncl']]
-                ivalues = extValuation(dados)
-                
+                ivalues = extValuation(dados)                
             else:
                 metodo = "salvar"
-                ivalues = funcValuation(dados)
-                
+                ivalues = funcValuation(dados) #para entrada manual                
             ivalues.flows()  
             value_to_bd = classBD(
                 ivalues.ebit, ivalues.ebitda,

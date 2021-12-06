@@ -1,5 +1,5 @@
 import csv
-import os
+from zipfile import *
 from datetime import datetime
 import json
 
@@ -32,7 +32,7 @@ def jsonCreate(dados):
     #escrever formato JSON
 
     f= open(fileName , "w")
-    json.dump(data , f, sort_keys=True , indent=4)
+    json.dump(dados , f, sort_keys=True , indent=4)
     f.close()
     #ler formato json
 
@@ -40,23 +40,9 @@ def jsonCreate(dados):
     data = json.load(f)
     f.close
     print (data)
+    zipFile(fileName)
 
-def zipFile():
-    path_zip = os.path.join(os.sep, "c:\\", "output.zip")
-    path_dir = os.path.join(os.sep , "c:\\" , "src")
-
-    zf = zip.ZipFile(path_zip , "w")
-    for dirname , subdirs, files in os.walk(path_dir):
-        zf.write(dirname)
-        for filename in files:
-            zf.write(os.path.join(dirname , filename))
-    zf.close()
-
-def descZip():
-    dir = os.path.join(os.sep , "c:\\", "teste")
-    if not os.path.isdir(dir):
-        os.makedirs(dir)
-
-    zf = zip.ZipFile("c:\\output.zip", "r")
-    zf.extractall(dir)
-    zf.close()
+def zipFile(fileNameZip):
+    with ZipFile(f"{fileNameZip}.zip", "w") as zf:
+        zf.write(f"{fileNameZip}")
+        zf.close()

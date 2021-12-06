@@ -50,7 +50,7 @@ def saveData(dado , sql , ticker):
         return 0
 
 
-def saveDatas(Bd , table):
+def saveDatas(Bd , metodo, table, id):
     
     if table == "valuation":
         
@@ -118,6 +118,7 @@ def delete(idDelete):
         print ("Dados Deletado com sucesso")
         
         con.close()
+        return ("Dados Deletado")
     except Exception as erro:
         print (erro)
 
@@ -125,21 +126,27 @@ def action_on_bd(dados):
     for d in dados:
         chave = d    
     if chave == "idDelete": 
-        delete (dados[chave])
-    
+        return delete (dados[chave])
+    elif chave == "idUpdate":
+       return search_to_update(dados[chave])
 
 
-def update(idUsuario , nmUsuario, email):
+def search_to_update(idEmpresa):
     try:
         con = connection()
         cur = con.cursor()
-        sql = """UPDATE FROM tb_usuarios WHERE (id_usuario) = (%s);"""
+        sql = """SELECT *
+         FROM tb_valuation v
+         JOIN tb_ebit e ON e.id_empresa = v.ebit
+         JOIN tb_ebitda da ON da.id_empresa = v.ebitda
+         JOIN tb_ncl n ON n.id_empresa = v.ncl
+         WHERE v.id_empresa = (%s);"""
         
-        cur.execute(cur.mogrify(sql , (idUsuario)))
+        cur.execute(cur.mogrify(sql , (idEmpresa)))
+        rows = cur.fetchall()
         con.commit()
-        print ("Dados Deletado com sucesso")
-        
         con.close()
+        return rows
     except Exception as erro:
         print (erro)
 

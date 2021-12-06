@@ -1,7 +1,6 @@
 
 from flask import Flask , render_template , request
 from flask_material import Material
-
 import connectionDataBase.connectionBD as BD
 from valuation.exteriorStocksValues import datasCompaniesExt as dcExt , ValuesExterior as vext
 from valuation.executeValuation import initialValues
@@ -72,11 +71,19 @@ def valuation():
 @app.route('/showvaluation' , methods = ['post' , 'get'])
 def showvaluation():
     dados  = request.form
+
     if request.method == "POST":
         if dados['setExterior']:
+            metodo = "salvar"
+            id = 0
             ivalues = extValuation(dados)
+        elif dados['idValuation']:
+            metodo = "atualizar"
+            id = dados['idValuation']
+            print("logica para atualizar")
         else:
-          ivalues = funcValuation(dados)
+            metodo = "salvar"
+            ivalues = funcValuation(dados)
         ivalues.flows()  
         value_to_bd = classBD(
             ivalues.ebit, ivalues.ebitda,
@@ -84,7 +91,7 @@ def showvaluation():
             ivalues.enterprise,ivalues.equity, dados['setExterior'],
             ivalues.stockPrice , '' ,''
         ) 
-        BD.saveDatas(value_to_bd , "valuation")  
+        BD.saveDatas(value_to_bd , metodo , "valuation", id)  
         return render_template('showvaluation.html', dolar=indicators, ivalues = ivalues, dados = dados)
     else:
         return render_template('showvaluation.html', dolar=indicators)
@@ -104,23 +111,29 @@ def dashboard():
 @app.route('/login' , methods = ['post' , 'get'])
 def login():
     if request.method == "POST":
+        metodo = "salvar"
         datas_DB = request.form        
 
         user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['usuario'] , datas_DB['senha'])
 
         BD.saveDatas(user_to_bd , "usuario")
+
     return render_template('login.html' )
 
-@app.route('/simulation' , methods=['post' , 'get'])
-def simulation():    
-    requestHtml = request.args  
-    if requestHtml:
-        (labels , values , volume) = initialState(requestHtml['ticker'])
-    else:
-       (labels , values, volume) = initialState("IBOV.SA") 
+#pular 14, 22 , 29 , 0 a 8 val - 9 a 15 ebit - 16 a 22 ebitda - 23 a 29 ncl
+@app.route('/listDatas' , methods=['post' , 'get'])
+def listDatas():
+    requesthtml = request.args
+    if requesthtml: 
+        returnBd = BD.action_on_bd(requesthtml)
+        rbd = returnBd[0]
+        if len(returnBd[0]) > 20:
+            return render_template('updateValuation.html',dolar = indicators, rbd = rbd)
+          
+    rows = BD.consultDatas()
     
-    
-    return render_template('simulation.html', labelsData=labels, valuesData = values ,dolar = indicators )
+    return render_template('listDatasBD.html', dolar = indicators, rows = rows )
+ 
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])
 def exportFiles():

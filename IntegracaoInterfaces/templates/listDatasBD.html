@@ -1,0 +1,67 @@
+  {% include 'head.html' %}
+        
+  <div >
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Açoes em analise</h4></li>
+      <li class="collection-item">
+        <div class="row">
+          <div class="col s2">
+            ID
+          </div>
+          <div class="col s2">
+            TICKER
+          </div>
+          <div class="col s3">            
+            QTD AÇOES
+          </div>
+          <div class="col s3">            
+            PREÇO
+          </div>
+          <div class="col s2">
+            
+          </div>
+        </div>
+      </li>
+      {% for row in rows%}
+      <li class="collection-item">
+        <div class="row">
+          <div class="col s2">
+            <label id="{{row[0]}}">{{row[0]}}</label>
+          </div>
+          <div class="col s2">
+            {{row[1]}}
+          </div>
+          <div class="col s3">
+            {{row[2]}}
+            
+          </div>
+          <div class="col s3">
+            {{row[8]}}            
+          </div>
+          <div class="col s2">
+            <span style="padding: 5px;">
+              <a href="/listDatas?idUpdate={{row[0]}}" >
+              <i class="material-icons">cached</i></a>
+              </span>
+            <span style="padding: 5px;">
+              <a href="/listDatas?idDelete={{row[0]}}" >
+              <i class="material-icons">delete</i></a>
+            </span>
+            <span style="padding: 5px;">
+              <a href="/listDatas?idDetail={{row[0]}}" >
+              <i class="material-icons">visibility</i></a>
+            </span>
+          </div>
+          
+        </div>
+      </li>
+      {% endfor%}
+    </ul>
+  </div>
+
+  {% include "footer.html" %}
+
+  
+</html>
+
+

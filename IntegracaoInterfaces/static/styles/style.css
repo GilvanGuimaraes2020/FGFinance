@@ -124,6 +124,10 @@
     color: white;
 }
 
+.collection-header, .collection-item {
+    color: black;
+}
+
 .nova_senha {
     position: absolute;
     top:450px;

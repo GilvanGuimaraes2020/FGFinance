@@ -1,13 +1,15 @@
 
 import psycopg2
 
+
+from lists.message import messages
 def connection():
     pg = psycopg2
     try:
         con = pg.connect(
             database = "provanp2_tei",
             user = "postgres",
-            password = "edqmzmcn",
+            password = "FTC2019@Gil#",
             host = "127.0.0.1",
             port = "5432"
         )
@@ -51,37 +53,33 @@ def saveData(dado , sql , ticker):
         return 0
 
 
-def saveDatas(Bd , metodo, table, id):
+def saveDatas(Bd , metodo, table, ids):
+    
+    message = messages(metodo , table)
     
     if table == "valuation":
-        
+        tb = " tb_ebit "
+        sql = message[0] + tb + message[1] + message[3]
+        print (sql)
         ticker = Bd.ticker
-        
-        sql = """INSERT INTO tb_ebit
-        (ano1 , ano2, ano3, ano4, ano5, ticker) 
-        VALUES %s  RETURNING id_empresa; """
-        
+                
         id_ebit = saveData(Bd.ebit, sql , ticker )
         print (id_ebit)
 
-        sql = """INSERT INTO tb_ebitda
-        (ano1 , ano2, ano3, ano4, ano5, ticker) 
-        VALUES %s  RETURNING id_empresa; """
+        tb = " tb_ebitda "
+        sql =  message[0] + tb + message[1] + message[3]
 
         id_ebitda = saveData(Bd.ebitda ,sql, ticker)
         print (id_ebitda)
 
-        sql = """INSERT INTO tb_ncl
-        (ano1 , ano2, ano3, ano4, ano5, ticker) 
-        VALUES %s  RETURNING id_empresa; """
+        tb = " tb_ncl "
+        sql =  message[0] + tb + message[1] + message[3]
         
         id_cg = saveData(Bd.ncl ,sql , ticker) 
         print (id_cg)
-
-        sql = """INSERT INTO tb_valuation
-        (qtd_acoes , ebit, ebitda, ncl, valor_empresa, valor_patrimonial, valor_acao, ticker) 
-        VALUES %s  RETURNING id_empresa; """
-
+        tb = " tb_valuation "
+        sql =  message[0] + tb + message[2] + message[3]
+        
         dados = [Bd.stocks , id_ebit, id_ebitda, id_cg, Bd.enterprise, Bd.equity, Bd.price]
         id_value = saveData(dados, sql , ticker)
         print (id_value)

@@ -105,7 +105,7 @@ def dashboard():
 def login():
     if request.method == "POST":
         datas_DB = request.form        
-        user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['nome'] , datas_DB['email'])
+        user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['usuario'] , datas_DB['senha'])
         BD.saveDatas(user_to_bd , "usuario")
     return render_template('login.html' )
 

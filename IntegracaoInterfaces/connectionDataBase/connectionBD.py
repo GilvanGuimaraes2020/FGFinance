@@ -1,5 +1,6 @@
 
 import psycopg2
+
 def connection():
     pg = psycopg2
     try:
@@ -109,7 +110,7 @@ def delete(idUsuario):
     except Exception as erro:
         print (erro)
 
-def update(idUsuario , nmUsuario, email):
+def update(idUsuario , nmUsuario, email, senha):
     try:
         con = connection()
         cur = con.cursor()

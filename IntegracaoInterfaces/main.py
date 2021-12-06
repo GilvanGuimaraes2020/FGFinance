@@ -7,7 +7,7 @@ import connectionDataBase.connectionBD as BD
 import connectionDataBase.validConection as VC
 from valuation.exteriorStocksValues import datasCompaniesExt as dcExt , ValuesExterior as vext
 from valuation.executeValuation import initialValues
-from lists.classesBD import connBD as classBD
+from lists.classesBD import connBD as classBD , BD_usuarios as bdu
 from setDados.setDatasValuation import extValuation as setValues
 import getFiles.exportFile  as exportFile
 import indicators.readIndicators as readIndicators
@@ -61,13 +61,18 @@ def login():
 @app.route('/userRegister' , methods = ['post' , 'get'])
 def userRegister():
     if request.method == 'POST':
-        metodo = "salvar"
-        datas_DB = request.form
-        ids = 0
-        user_to_bd = classBD('', '', '', '', '', '', '','', datas_DB['usuario'] ,datas_DB['email'], datas_DB['senha'])
-
-        BD.saveDatas(user_to_bd ,metodo, "usuario" , ids)
-        return render_template('login.html')
+        dDB = request.form
+        if request.form['id_usuario']:
+            BD.updateUsuario(dDB['id_usuario'], dDB['usuario'],
+            dDB['email'] , dDB['senha'])
+            return render_template('login.html')
+        else:
+            metodo = "salvar"
+            
+            ids = 0
+            user_to_bd = bdu(dDB['usuario'] ,dDB['email'], dDB['senha'])
+            BD.saveDatas(user_to_bd ,metodo, "usuario" , ids)
+            return render_template('login.html')
     else:
         return render_template('userRegister.html')
 
@@ -129,7 +134,7 @@ def showvaluation():
                 ivalues.ebit, ivalues.ebitda,
                 ivalues.ncl , ivalues.quantityStock,
                 ivalues.enterprise,ivalues.equity, dados['setExterior'],
-                ivalues.stockPrice , '' ,''
+                ivalues.stockPrice 
             ) 
             BD.saveDatas(value_to_bd , metodo , "valuation", ids)  
             return render_template('showvaluation.html', dolar=indicators, ivalues = ivalues, dados = dados)
@@ -156,15 +161,36 @@ def dashboard():
 def listDatas():
     if session['username']:
         requesthtml = request.args
+        table = "tb_valuation"
         if requesthtml: 
             returnBd = BD.action_on_bd(requesthtml)
-            rbd = returnBd[0]
-            if len(returnBd[0]) > 20:
+            rbd = returnBd
+            print(rbd)
+            if rbd:
                 return render_template('updateValuation.html',dolar = indicators, rbd = rbd)
             
-        rows = BD.consultDatas()
+        rows = BD.consultDatas(table)
         
         return render_template('listDatasBD.html', dolar = indicators, rows = rows )
+    else:
+        return render_template('login.html')
+
+@app.route('/listUsers' , methods=['post' , 'get'])
+def listUsers():
+    if session['username']:
+        table = "tb_usuarios"
+        requesthtml = request.args
+        
+        if requesthtml: 
+            returnBd = BD.action_on_bd(requesthtml)
+            user = returnBd
+            print (user)
+            if user :
+                return render_template('userRegister.html',dolar = indicators, user = user)
+        
+        rows = BD.consultDatas(table)
+        
+        return render_template('listUsuarios.html', dolar = indicators, rows = rows )
     else:
         return render_template('login.html')
 

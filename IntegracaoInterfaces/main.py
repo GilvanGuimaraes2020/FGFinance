@@ -35,7 +35,9 @@ Material(app)
 
 @app.route('/')
 def index():
+
    return render_template('index.html' , dolar = indicators)
+
 
 
 @app.route('/about' , methods = ['GET' , 'POST'])
@@ -114,9 +116,12 @@ def login():
     if request.method == "POST":
         metodo = "salvar"
         datas_DB = request.form        
-        user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['nome'] , datas_DB['email'])
-        BD.saveDatas(user_to_bd , metodo, "usuario")
-    return render_template('login.html' )
+
+        user_to_bd = classBD('', '', '', '', '', '', '', datas_DB['usuario'] , datas_DB['senha'])
+
+        BD.saveDatas(user_to_bd , "usuario")
+
+    return render_template('login.html')
 
 #pular 14, 22 , 29 , 0 a 8 val - 9 a 15 ebit - 16 a 22 ebitda - 23 a 29 ncl
 @app.route('/listDatas' , methods=['post' , 'get'])

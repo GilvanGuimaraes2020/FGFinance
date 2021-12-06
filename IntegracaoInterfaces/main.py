@@ -35,8 +35,7 @@ Material(app)
 
 @app.route('/')
 def index():
-    products = ['Baguete', 'Ciabata', 'Pretzel']
-    return render_template('index.html' , products=products, dolar = indicators)
+   return render_template('index.html' , dolar = indicators)
 
 
 @app.route('/about' , methods = ['GET' , 'POST'])
@@ -75,15 +74,17 @@ def showvaluation():
     if request.method == "POST":
         if dados['setExterior']:
             metodo = "salvar"
-            id = 0
+            ids = 0
             ivalues = extValuation(dados)
         elif dados['idValuation']:
             metodo = "atualizar"
-            id = dados['idValuation']
-            print("logica para atualizar")
+            ids = [dados['idValuation'],dados['idebit'],dados['idebitda'], dados['idncl']]
+            ivalues = extValuation(dados)
+            
         else:
             metodo = "salvar"
             ivalues = funcValuation(dados)
+            
         ivalues.flows()  
         value_to_bd = classBD(
             ivalues.ebit, ivalues.ebitda,
@@ -91,7 +92,7 @@ def showvaluation():
             ivalues.enterprise,ivalues.equity, dados['setExterior'],
             ivalues.stockPrice , '' ,''
         ) 
-        BD.saveDatas(value_to_bd , metodo , "valuation", id)  
+        BD.saveDatas(value_to_bd , metodo , "valuation", ids)  
         return render_template('showvaluation.html', dolar=indicators, ivalues = ivalues, dados = dados)
     else:
         return render_template('showvaluation.html', dolar=indicators)

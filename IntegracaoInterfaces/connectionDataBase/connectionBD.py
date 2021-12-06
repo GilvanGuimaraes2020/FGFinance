@@ -93,7 +93,20 @@ def saveDatas(Bd , table):
     else:
         return False
 
-
+def consultDatas():
+    try:
+        con = connection()
+        cur = con.cursor()
+        sql = """SELECT * FROM tb_valuation;"""
+        
+        cur.execute(cur.mogrify(sql))
+        rows = cur.fetchall()
+        con.commit()
+               
+        con.close()
+        return rows
+    except Exception as erro:
+        print (erro)
 
 def delete(idUsuario):
     try:

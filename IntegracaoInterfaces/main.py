@@ -111,15 +111,9 @@ def login():
 
 @app.route('/listDatas' , methods=['post' , 'get'])
 def listDatas():    
-    requestHtml = request.args  
-    if requestHtml:
-        (labels , values , volume) = initialState(requestHtml['ticker'])
-    else:
-       (labels , values, volume) = initialState("IBOV.SA") 
-
-
- 
-    return render_template('listDatasBD.html', labelsData=labels, valuesData = values ,dolar = indicators )
+    rows = BD.consultDatas()
+    
+    return render_template('listDatasBD.html', dolar = indicators, rows = rows )
 
 
 @app.route('/exportFiles' , methods = ['post' , 'get'])

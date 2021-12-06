@@ -5,7 +5,7 @@
 	<section class="container white-text">
 		<div id="section-login">
 			<div class="fundo_transparente_login"></div>
-			<form id="form_login" action="/dashboard" method="post">
+			<form id="form_login" action="/login" method="post" onsubmit="return validForm()">
 				<div class="input-field col s12">
 					<input id="name_pass" type="text" name="usuario" value="" class="validate" style="border-bottom: 1px solid white;">
 					<label class="active" for="name_pass" style="font-size: 20px;">Usuário</label>
@@ -26,5 +26,21 @@
 	</section>
 
 	{% include 'footerInitial.html' %}
+<script>
+	function validForm(){
+		var items = document.getElementsByClassName("validate");
+		var len = items.length;
+		var valid = true;
+		for(var i = 0; i < len; i++){
+			if (!items[i].value){
+				valid = false;
+			}
+		}
 
+		if (!valid){
+            alert('Por favor preencha todos os campos.');
+            return false;
+          } else { return true; }
+	}
+</script>
 </html>

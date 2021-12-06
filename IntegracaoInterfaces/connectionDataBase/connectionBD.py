@@ -1,8 +1,9 @@
 
+from re import S
 import psycopg2
 
 
-from lists.message import messages
+from lists.message import *
 def connection():
     pg = psycopg2
     try:
@@ -55,7 +56,7 @@ def saveData(dado , sql , ticker):
 
 def saveDatas(Bd , metodo, table, ids):
     
-    message = messages(metodo , table)
+    message = messagesBD(metodo , table)
     
     if table == "valuation":
         tb = " tb_ebit "
@@ -84,10 +85,10 @@ def saveDatas(Bd , metodo, table, ids):
         id_value = saveData(dados, sql , ticker)
         print (id_value)
     elif table == "usuario":
-        sql = """INSERT INTO tb_usuarios
-        (nm_usuario , email) 
-        VALUES %s  RETURNING id_usuario;"""
-        dados = [Bd.nm_usuario , Bd.email]
+        
+        sql = message[0] +  message[1] + message[2]
+        print (sql)
+        dados = [Bd.nm_usuario , Bd.email, Bd.senha]
         confUser = saveUser(dados , sql)
     else:
         return False

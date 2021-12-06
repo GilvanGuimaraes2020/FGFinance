@@ -1,6 +1,6 @@
 class connBD:
     
-    def __init__(self, ebit, ebitda, ncl, stocks, enterprise, equity, ticker,price , name , email) :
+    def __init__(self, ebit, ebitda, ncl, stocks, enterprise, equity, ticker,price , name , email, senha) :
         self.ebit = ebit
         self.ebitda = ebitda
         self.ncl = ncl
@@ -11,6 +11,7 @@ class connBD:
         self.price = price
         self.nm_usuario = name
         self.email = email
+        self.senha = senha
 
    
    

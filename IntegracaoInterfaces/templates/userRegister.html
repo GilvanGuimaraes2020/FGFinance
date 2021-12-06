@@ -7,18 +7,32 @@
 	<div id="section-cadastro">
 		<div class="fundo_transparente_cadastro"></div>
 		<form id="form_cadastro" action="/userRegister" method="POST" onsubmit="return validForm()">
-				<div class="input-field col s12">
-					<input id="usuario" type="text" name="usuario" value="" class="validate" style="border-bottom: 1px solid white;">
+			{% if user %}
+			<input type="hidden" name="id_usuario" value="{{user[0]}}"	>
+			<div class="input-field col s12">
+					<input id="usuario" type="text" name="usuario" value="{{user[1]}}" class="validate" style="border-bottom: 1px solid white;">
 					<label class="active" for="usuario" style="font-size: 20px;">Nome</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="email" type="text" name="email" value="" class="validate" style="border-bottom: 1px solid white;">
+					<input id="email" type="text" name="email" value="{{user[2]}}" class="validate" style="border-bottom: 1px solid white;">
 					<label class="active" for="email" style="font-size: 20px;">E-mail</label>
 				</div>
-				<div class="input-field col s12">
-					<input id="senha" type="password" name="senha" value="" class="validate" style="border-bottom: 1px solid white;">
-					<label class="active" for="senha" style="font-size: 20px;">Senha</label>
-				</div>
+				
+			{%else%}							
+							<div class="input-field col s12">
+								<input id="usuario" type="text" name="usuario" value="" class="validate" style="border-bottom: 1px solid white;">
+								<label class="active" for="usuario" style="font-size: 20px;">Nome</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="email" type="text" name="email" value="" class="validate" style="border-bottom: 1px solid white;">
+								<label class="active" for="email" style="font-size: 20px;">E-mail</label>
+							</div>
+							
+			{%endif%}
+							<div class="input-field col s12">
+								<input id="senha" type="password" name="senha" value="" class="validate" style="border-bottom: 1px solid white;">
+								<label class="active" for="senha" style="font-size: 20px;">Senha</label>
+							</div>
 			<div class="center" style="margin: 10px 5px 10px 5px;">
 				<input type="submit" name="salvar" value="Salvar"  class="waves-effect pink darken-2 btn-large">
 			</div>

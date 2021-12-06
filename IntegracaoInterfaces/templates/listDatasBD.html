@@ -1,5 +1,8 @@
   {% include 'head.html' %}
-        
+  
+ 
+  
+  
   <div >
     <ul class="collection with-header">
       <li class="collection-header"><h4>Açoes em analise</h4></li>
@@ -60,7 +63,20 @@
   </div>
 
   {% include "footer.html" %}
-
+  <script>
+    function defLista(){
+      var items = document.getElementsByClassName("validate");
+      var len = items.length;
+      var valid = true;
+      for (var i = 0; i < len; i++){
+        if (!items[i].value ) {valid = false;}
+      }
+      if (!valid){
+              alert('Por favor preencha todos os campos.');
+              return false;
+            } else { return true; }
+    }
+  </script>
   
 </html>
 

@@ -93,11 +93,11 @@ def saveDatas(Bd , metodo, table, ids):
     else:
         return False
 
-def consultDatas():
+def consultDatas(table):
     try:
         con = connection()
         cur = con.cursor()
-        sql = """SELECT * FROM tb_valuation;"""
+        sql = f"""SELECT * FROM {table};"""
         
         cur.execute(cur.mogrify(sql))
         rows = cur.fetchall()
@@ -108,48 +108,69 @@ def consultDatas():
     except Exception as erro:
         print (erro)
 
-def delete(idDelete):
+def delete(sql , idDelete):
     try:
         con = connection()
         cur = con.cursor()
-        sql = """DELETE FROM tb_valuation WHERE (id_empresa) = (%s);"""
+        
         cur.execute(cur.mogrify(sql , (idDelete[0])))
         con.commit()
         print ("Dados Deletado com sucesso")
         
         con.close()
-        return ("Dados Deletado")
+        return " "
     except Exception as erro:
         print (erro)
 
 def action_on_bd(dados):
     for d in dados:
         chave = d    
-    if chave == "idDelete": 
-        return delete (dados[chave])
+    if chave == "idDelete":
+        sql = """DELETE FROM tb_valuation WHERE id_empresa= %s;""" 
+        return delete (sql, dados[chave])
+    elif chave == "idDeleteUser":
+        sql = """DELETE FROM tb_usuarios WHERE id_usuario = %s;"""
+        return delete (sql, dados[chave])
     elif chave == "idUpdate":
-       return search_to_update(dados[chave])
-
-
-def search_to_update(idEmpresa):
-
-    try:
-        con = connection()
-        cur = con.cursor()
         sql = """SELECT *
          FROM tb_valuation v
          JOIN tb_ebit e ON e.id_empresa = v.ebit
          JOIN tb_ebitda da ON da.id_empresa = v.ebitda
          JOIN tb_ncl n ON n.id_empresa = v.ncl
          WHERE v.id_empresa = (%s);"""
-        
+        return search_to_update(sql ,dados[chave])
+    elif chave == "idUpdateUser":
+        sql = """SELECT *
+         FROM tb_usuarios v
+          WHERE v.id_usuario = %s;"""
+        return search_to_update(sql, dados[chave])
+
+
+def search_to_update(sql, idEmpresa):
+
+    try:
+        con = connection()
+        cur = con.cursor()          
         cur.execute(cur.mogrify(sql , (idEmpresa)))
-        rows = cur.fetchall()
+        rows = cur.fetchone()
         con.commit()
         con.close()
         return rows
     except Exception as erro:
         print (erro)
 
+def updateUsuario (id , usuario, email, senha):
+    try:
+        con = connection()
+        cur = con.cursor()  
+        sql = """ UPDATE tb_usuarios SET nm_usuario = %s ,
+        email = %s , senha = %s WHERE id_usuario = %s"""        
+        cur.execute(cur.mogrify(sql , (usuario, email, senha, id)))
+        
+        con.commit()
+        con.close()
+        print ("Dados atualizado com sucesso")
+    except Exception as erro:
+        print ('erro ' , erro)
 """ y = b','.join(cur.mogrify("(%s,%s,%s,%s,%s,{ticker})", x ) for x in ebit)
         insert = sql + y.decode() """

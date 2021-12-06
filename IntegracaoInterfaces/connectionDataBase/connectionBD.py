@@ -1,5 +1,6 @@
 
 import psycopg2
+
 def connection():
     pg = psycopg2
     try:
@@ -132,6 +133,7 @@ def action_on_bd(dados):
 
 
 def search_to_update(idEmpresa):
+
     try:
         con = connection()
         cur = con.cursor()

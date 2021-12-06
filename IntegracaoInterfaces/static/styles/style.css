@@ -1,58 +1,4 @@
-
-.menu ul li:hover {
-    background-color: black;
-    color: black;
-}
-.indicators{
-    display: flex;
-    background-color: black;
-    overflow: auto;
-}
-.ind{
-    margin-left: 25px;
-    margin-right: 80px;
-}
-.cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
-    margin: 10px;
-    padding: 5px;
-}
-.taxa_juros {
-    height: min-content;
-}
-.criptomoedas {
-    height: min-content;
-}
-.dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.pesquisa {
-    width: 350px;
-    height: 60px;
-    border-radius: 30px;
-}
-
-#myChart {
-    background-color: white;
-}
-
-.cards_entrada {
-    display: grid;
-}
-.quadro_cadastro, .quadro_login {
-    width: 100px;
-    height: 100px;
-    padding: 30px;
-
-}
-
-.collection-header, .collection-item {
-    color: black;
-}
-
-
-
+/* INÍCIO - ESTILO DAS PÁGINAS: INICIAL, LOGIN E CADASTRO DE USUÁRIOS */
 .tela_index {
     display: flex;
     position: relative;
@@ -62,6 +8,7 @@
     align-content: center;
     justify-content: center;
 }
+
 .fundo_transparente_inicial {
     position: absolute;
     width: 400px;
@@ -72,6 +19,7 @@
     box-shadow: 10px 10px 10px black;
     margin: 5rem;
 }
+
 .fundo_transparente_login {
     position: absolute;
     width: 50%;
@@ -82,6 +30,18 @@
     box-shadow: 10px 10px 10px black;
     margin: 2rem;
 }
+
+.fundo_transparente_cadastro {
+    position: absolute;
+    width: 50%;
+    height: 400px;
+    background-color: white;
+    opacity: 0.4;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+    margin: 2rem;
+}
+
 #options {
     position: absolute;
     width: 400px;
@@ -93,6 +53,7 @@
     justify-content: center;
     margin: 5rem;
 }
+
 #cadastro {
     width: 90%;
     display: flex;
@@ -103,6 +64,7 @@
     margin: 1rem;
     padding: 1rem;
 }
+
 #login {
     width: 90%;
     display: flex;
@@ -113,20 +75,33 @@
     margin: 1rem;
     padding: 1rem;
 }
+
 #img_index {
     opacity: 0.9;
 }
+
 #section-login {
     display: flex;
     flex-direction: row;
     position: relative;
     width: 992px;
     height: 500px;
-    border: 1px solid white;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
 }
+
+#section-cadastro {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 992px;
+    height: 500px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
 #form_login {
     width: 40%;
     display: flex;
@@ -135,14 +110,65 @@
     flex-wrap: wrap;
     margin-top: 9rem;
 }
-#form_login label{
+
+#form_cadastro {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+}
+
+#form_login label, #form_cadastro label {
     color: white;
 }
-#form_login input{
-    color: white;
+
+.nova_senha {
+    position: absolute;
+    top:450px;
 }
+/* FIM - ESTILO DAS PÁGINAS: INICIAL, LOGIN E CADASTRO DE USUÁRIOS */
         
 
-/* ESTILO DAS PÁGINAS: DASHBOARD E DEMAIS PÁGINAS */
+/* INÍCIO - ESTILO DAS PÁGINAS: DASHBOARD E DEMAIS PÁGINAS */
+.menu ul li:hover {
+    background-color: black;
+}
 
+.indicators{
+    display: flex;
+    background-color: black;
+    overflow: auto;
+}
 
+.ind{
+    margin-left: 25px;
+    margin-right: 80px;
+}
+
+.cambio, .bolsa_de_valores, .taxa_juros, .criptomoedas{
+    margin: 10px;
+    padding: 5px;
+}
+
+.taxa_juros {
+    height: min-content;
+}
+
+.criptomoedas {
+    height: min-content;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.pesquisa {
+    width: 350px;
+    height: 60px;
+    border-radius: 30px;
+}
+/* FIM - ESTILO DAS PÁGINAS: DASHBOARD E DEMAIS PÁGINAS */

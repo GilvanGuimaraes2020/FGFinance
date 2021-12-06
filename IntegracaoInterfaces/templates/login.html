@@ -5,24 +5,23 @@
 	<section class="container white-text">
 		<div id="section-login">
 			<div class="fundo_transparente_login"></div>
-			<form action="/dashboard" method="post">
+			<form id="form_login" action="/dashboard" method="post">
 				<div class="input-field col s12">
-					<input id="name_pass" type="text" name="nome" value="" class="validate">
-					<label class="active" for="name_pass">Usuário</label>
+					<input id="name_pass" type="text" name="usuario" value="" class="validate" style="border-bottom: 1px solid white;">
+					<label class="active" for="name_pass" style="font-size: 20px;">Usuário</label>
 				</div>
 				<div class="input-field col s12">
-					<input id="password" type="password" name="senha" value="" class="validate">
-					<label class="active" for="password">Senha</label>
+					<input id="password" type="password" name="senha" value="" class="validate" style="border-bottom: 1px solid white;">
+					<label class="active" for="password" style="font-size: 20px;">Senha</label>
 				</div>
-				
 				
 				<div class="center">
 					<input type="submit" name="enviar" value="Enviar" class="waves-effect pink darken-2 btn-large">
 				</div>
-				<div class="center" style="margin-bottom: 20px;"> 
-					<a href="userRegister">Esqueci minha senha</a>
-				</div>
 			</form>
+			<div class="nova_senha" style="margin-bottom: 20px;"> 
+				<a href="userRegister">Esqueci minha senha</a>
+			</div>
 		</div>
 	</section>
 

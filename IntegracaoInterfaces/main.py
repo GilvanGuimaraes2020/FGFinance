@@ -1,7 +1,6 @@
 
 from flask import Flask , render_template , request
 from flask_material import Material
-
 import connectionDataBase.connectionBD as BD
 from valuation.exteriorStocksValues import datasCompaniesExt as dcExt , ValuesExterior as vext
 from valuation.executeValuation import initialValues
@@ -110,7 +109,13 @@ def login():
     return render_template('login.html' )
 
 @app.route('/listDatas' , methods=['post' , 'get'])
-def listDatas():    
+def listDatas():
+    requesthtml = request.args
+    if requesthtml:
+        BD.action_on_bd(requesthtml)
+        
+        
+        
     rows = BD.consultDatas()
     
     return render_template('listDatasBD.html', dolar = indicators, rows = rows )

@@ -108,19 +108,26 @@ def consultDatas():
     except Exception as erro:
         print (erro)
 
-def delete(idUsuario):
+def delete(idDelete):
     try:
         con = connection()
         cur = con.cursor()
-        sql = """DELETE FROM tb_usuarios WHERE (id_usuario) = (%s);"""
-        
-        cur.execute(cur.mogrify(sql , (idUsuario)))
+        sql = """DELETE FROM tb_valuation WHERE (id_empresa) = (%s);"""
+        cur.execute(cur.mogrify(sql , (idDelete[0])))
         con.commit()
         print ("Dados Deletado com sucesso")
         
         con.close()
     except Exception as erro:
         print (erro)
+
+def action_on_bd(dados):
+    for d in dados:
+        chave = d    
+    if chave == "idDelete": 
+        delete (dados[chave])
+    
+
 
 def update(idUsuario , nmUsuario, email):
     try:

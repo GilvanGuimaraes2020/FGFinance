@@ -35,8 +35,7 @@ Material(app)
 
 @app.route('/')
 def index():
-    products = ['Baguete', 'Ciabata', 'Pretzel']
-    return render_template('index.html' , products=products, dolar = indicators)
+    return render_template('index.html' , dolar = indicators)
 
 
 @app.route('/about' , methods = ['GET' , 'POST'])
@@ -118,7 +117,7 @@ def login():
 
         BD.saveDatas(user_to_bd , "usuario")
 
-    return render_template('login.html' )
+    return render_template('login.html')
 
 #pular 14, 22 , 29 , 0 a 8 val - 9 a 15 ebit - 16 a 22 ebitda - 23 a 29 ncl
 @app.route('/listDatas' , methods=['post' , 'get'])

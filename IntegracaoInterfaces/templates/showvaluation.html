@@ -1,18 +1,33 @@
 <html>
   {% include 'head.html' %}
   
-  <h3 class="center grey-text">Mostrar dados</h3> 
-    <h5>Retorna os dados do valuation</h5>
-    <h5>*******************************</h5>
-    <br><br>
-    <h5>Retorna listas:ir, depreciaçao, nopat, capex, fluxo operacional, fluxo liquido </h5>
-    <h4>{{ivalues.ebitda}}</h4>
-    <br><br>
-    <h5>*******************************</h5>
-    <h5>Retorna: fluxo futuro, flx perpetuo, flx desc, valor empresa, equityvalue, preco acao</h5>
-    <h4>{{ivalues.quantityStock}}</h4>
+  <h3 class="center white-text">Mostrar dados</h3>
+  <br>
+  <div class="container">
+    <h5>Retorno do valuation</h5>
+    <table>
+      <tr>
+          <th style="text-align: right;">Ebit [R$]</th>
+          <th style="text-align: right;">Ebitda [R$]</th>
+          <th style="text-align: right;">NCL</th>
+          <th style="text-align: right;">Qtde Ações</th>
+          <th style="text-align: right;">Enterprise [R$]</th>
+          <th style="text-align: right;">Equity Value [R$]</th>
+          <th style="text-align: right;">Preço da ação [R$]</th>
+      </tr>
+      <tr>
+        <td style="text-align: right;">{{'%0.2f'|format((ivalues.ebit)|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.ebitda|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.ncl|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.quantityStock|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.enterprise|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.equity|float)}}</td>
+        <td style="text-align: right;">{{'%0.2f'|format(ivalues.stockPrice|float)}}</td>
+      </tr>
+    </table>
+    <br>
     <form action="/exportFiles" method="post">
-      <input type="hidden" name="stockPrice" value="{{ivalues.cash}}">
+      <input type="hidden" name="stockPrice" value="{{ivalues.stockPrice}}">
       <input type="hidden" name="enterpriseValue" value="{{ivalues.cash}}">
       <input type="hidden" name="fclTerminal" value="{{ivalues.cash}}">
       <input type="hidden" name="ir" value="{{ivalues.ir}}">
@@ -21,17 +36,19 @@
       <input type="hidden" name="capex" value="{{ivalues.capex}}">
       <input type="hidden" name="ebit" value="{{ivalues.ebit}}">
       <input type="hidden" name="ebitda" value="{{ivalues.ebitda}}">
+      <input type="hidden" name="stockPrice" value="{{ivalues.stockPrice}}">
 
      <div class="row">
         <div class="col s6">
-          <button type="submit" name="method" value="json"> Gerar Json </button>
+          <button type="submit" name="method" value="json" class="waves-effect pink darken-2 btn-large"> Gerar Json </button>
         </div>
      
         <div class="col s6">
-          <button type="submit" name="method" value="csv"> Gerar CSV </button>
+          <button type="submit" name="method" value="csv" class="waves-effect pink darken-2 btn-large"> Gerar CSV </button>
         </div>
       </div>
-    </form> 
+    </form>
+  </div>
     
           
       {% include "footer.html"  %}

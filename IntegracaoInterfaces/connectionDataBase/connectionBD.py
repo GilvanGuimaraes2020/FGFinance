@@ -99,7 +99,8 @@ def consultDatas(table):
         cur = con.cursor()
         sql = f"""SELECT * FROM {table};"""
         
-        cur.execute(cur.mogrify(sql))
+        #cur.execute(cur.mogrify(sql , table))
+        cur.execute(sql)
         rows = cur.fetchall()
         con.commit()
                
@@ -113,7 +114,10 @@ def delete(sql , idDelete):
         con = connection()
         cur = con.cursor()
         
-        cur.execute(cur.mogrify(sql , (idDelete[0])))
+        insert = sql + idDelete
+        
+        print (insert)
+        cur.execute(insert)
         con.commit()
         print ("Dados Deletado com sucesso")
         
@@ -126,23 +130,25 @@ def action_on_bd(dados):
     for d in dados:
         chave = d    
     if chave == "idDelete":
-        sql = """DELETE FROM tb_valuation WHERE id_empresa= %s;""" 
+        sql = """DELETE FROM tb_valuation WHERE id_empresa= """ 
+        print (sql , dados[chave])
         return delete (sql, dados[chave])
     elif chave == "idDeleteUser":
-        sql = """DELETE FROM tb_usuarios WHERE id_usuario = %s;"""
-        return delete (sql, dados[chave])
+        sql = """DELETE FROM tb_usuarios WHERE id_usuario = """
+        return delete (sql , dados[chave])
     elif chave == "idUpdate":
         sql = """SELECT *
          FROM tb_valuation v
          JOIN tb_ebit e ON e.id_empresa = v.ebit
          JOIN tb_ebitda da ON da.id_empresa = v.ebitda
          JOIN tb_ncl n ON n.id_empresa = v.ncl
-         WHERE v.id_empresa = (%s);"""
+         WHERE v.id_empresa = """
         return search_to_update(sql ,dados[chave])
     elif chave == "idUpdateUser":
         sql = """SELECT *
          FROM tb_usuarios v
-          WHERE v.id_usuario = %s;"""
+          WHERE v.id_usuario = """
+        print(sql , dados[chave])
         return search_to_update(sql, dados[chave])
 
 
@@ -150,8 +156,10 @@ def search_to_update(sql, idEmpresa):
 
     try:
         con = connection()
-        cur = con.cursor()          
-        cur.execute(cur.mogrify(sql , (idEmpresa)))
+        cur = con.cursor()
+        update_user = sql + idEmpresa           
+        #cur.execute(cur.mogrify(sql , (idEmpresa)))
+        cur.execute(update_user)
         rows = cur.fetchone()
         con.commit()
         con.close()

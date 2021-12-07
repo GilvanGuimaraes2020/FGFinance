@@ -114,7 +114,7 @@ def showvaluation():
     if session['username']:
         dados  = request.form
         if request.method == "POST":
-            if dados['setExterior']:
+            if dados['setExterior'] !=" ":
                 metodo = "salvar"
                 ids = 0
                 ivalues = extValuation(dados)
@@ -159,6 +159,7 @@ def listDatas():
         requesthtml = request.args
         table = "tb_valuation"
         if requesthtml: 
+            
             returnBd = BD.action_on_bd(requesthtml)
             rbd = returnBd
             print(rbd)
@@ -166,7 +167,7 @@ def listDatas():
                 return render_template('updateValuation.html',dolar = indicators, rbd = rbd)
             
         rows = BD.consultDatas(table)
-        
+        print (rows)
         return render_template('listDatasBD.html', dolar = indicators, rows = rows )
     else:
         return render_template('login.html')

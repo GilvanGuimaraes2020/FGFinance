@@ -10,7 +10,7 @@ def connection():
         con = pg.connect(
             database = "provanp2_tei",
             user = "postgres",
-            password = "FTC2019@Gil#",
+            password = "#########",
             host = "127.0.0.1",
             port = "5432"
         )
